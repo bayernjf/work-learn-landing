@@ -1,0 +1,7 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Work Learn mark</title>
+  <desc id="desc">An open W-shaped loop representing work, conversation, and learning.</desc>
+  <rect width="96" height="96" rx="24" fill="#171918"/>
+  <path d="M22 28L33.5 64L48 40L62.5 64L74 28" stroke="#B8F23E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M62.5 64L74 64" stroke="#EAF4E8" stroke-width="4" stroke-linecap="round"/>
+</svg>
