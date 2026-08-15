@@ -1,0 +1,71 @@
+# Work Learn
+
+> Work Learn is a personal English corpus system that works across AI agents. It turns your real working conversations with Claude, ChatGPT, Hermes, OpenClaw, and other agents into reusable, searchable, reviewable learning material. Work Learn is not another vocabulary app or a general note-taking tool — it turns the AI conversations you already have every day into a course built out of your own work.
+
+## Product Definition
+
+Work Learn is a cross-agent personal corpus system. Users deliberately trigger a capture inside a conversation; Work Learn understands the conversation, extracts the expressions worth learning, saves them to the corpus, and schedules review. Work Learn guarantees the material comes from your real working context; it never silently monitors or uploads whole conversations.
+
+## Three Ways In
+
+- Universal Learning Skill: the primary entry point. Capture the current conversation directly inside any agent that supports skills, saved after you confirm.
+- MCP / API: the capability layer. Handles saving, search, review, and cross-agent sync — the skill and external tools both read and write through it.
+- CLI and local companion: the compatibility layer. Covers terminal sessions and agents without skill support.
+
+## Core Loop
+
+```text
+Call the skill in your agent -> capture the conversation -> you confirm -> MCP/API saves it -> review on the web
+```
+
+## Core Capabilities
+
+- Extracts expressions from real working conversations instead of context-free word lists
+- Every item keeps its original context: what you were doing, and how it was phrased
+- One corpus shared across agents — switching models does not lose your material
+- Corpus search and daily review, organized around the mistakes you keep repeating
+- Clear first-version API surface: `save_material`, `search_corpus`, `get_review_items`
+
+## Differentiation
+
+1. Material from the workplace: you learn the phrasing you will need again tomorrow.
+2. Cross-agent and platform-neutral: Claude, ChatGPT, Hermes, and OpenClaw share one corpus.
+3. Three layers in: skill as the entry point, MCP/API as the capability layer, CLI for the terminal.
+4. Deliberate triggering: no monitoring or bulk upload by default, and nothing is saved without confirmation.
+5. Few and accurate: a small set of high-value items rather than more notes.
+
+## Tech Stack
+
+- Web: React + Vite, deployed on Cloudflare Pages
+- API: Hono, deployed as Vercel Functions
+- Data and auth: Supabase Auth + Postgres + RLS + Storage
+- Validation: all requests and responses go through `@work-learn/shared-schema`
+- Structure: pnpm monorepo with `apps/api` and `apps/web` deployed separately
+
+## Key Links
+
+- [English Home](https://work-learn.bayjf.com/)
+- [中文首页](https://work-learn.bayjf.com/zh/)
+- [How it works](https://work-learn.bayjf.com/#how-it-works)
+- [For every agent](https://work-learn.bayjf.com/#every-agent)
+- [The loop](https://work-learn.bayjf.com/#the-loop)
+- [GitHub repository](https://github.com/bayernjf/work-learn)
+- [Product proposal](https://github.com/bayernjf/work-learn/blob/main/docs/product-proposal.md)
+
+## Design Principles
+
+```text
+deliberate trigger -> least privilege -> local first -> redact by default -> confirm before saving
+```
+
+## Current Status
+
+The product is still under development and no hosted service is available yet, so the product entry button on this site is greyed out. The first version targets solo developers doing full-stack work with AI agents.
+
+## Non-Goals
+
+- Not a general vocabulary app or flashcard drill tool
+- Not tied to any single AI platform
+- No monitoring or bulk upload of conversations by default
+- The skill never reads or writes the database directly
+- No duplicate corpus or review logic on the desktop side
