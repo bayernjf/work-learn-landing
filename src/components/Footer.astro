@@ -31,6 +31,12 @@ const home = localizePath('/', lang);
   </a>
   <span>{t('footer.tagline')}</span>
   <div class="flex items-center gap-[18px]">
+    <a class="transition-colors hover:text-ink-900" href={localizePath('/privacy', lang)}>
+      {lang === 'zh' ? '隐私政策' : 'Privacy'}
+    </a>
+    <a class="transition-colors hover:text-ink-900" href={localizePath('/terms', lang)}>
+      {lang === 'zh' ? '服务条款' : 'Terms'}
+    </a>
     <BayjfLink size={16} class="text-[11px] text-ink-400 transition-colors hover:text-ink-900" />
     <StarOnGithub href={SOCIAL.github} size={14} class="inline-flex text-ink-400" />
   </div>
