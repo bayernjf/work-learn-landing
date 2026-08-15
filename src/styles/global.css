@@ -32,6 +32,9 @@
   --color-brand-800: #58624e;
   --color-brand-900: #435334;
 
+  /* 首版设计只有一个 800px 断点，保留它而不是拆成 Tailwind 默认档位 */
+  --breakpoint-wide: 800px;
+
   --font-sans: "Avenir Next", "SF Pro Display", -apple-system, BlinkMacSystemFont,
     "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
   --font-serif: Georgia, "Times New Roman", "Songti SC", serif;

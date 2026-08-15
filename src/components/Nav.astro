@@ -1,0 +1,65 @@
+---
+import { useTranslations, localizePath, getAltLangPath, getOtherLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const home = localizePath('/', lang);
+const altPath = getAltLangPath(Astro.url.pathname, getOtherLang(lang));
+
+const navItems = [
+  { key: 'nav.howItWorks' as const, hash: '#how-it-works' },
+  { key: 'nav.everyAgent' as const, hash: '#every-agent' },
+  { key: 'nav.loop' as const, hash: '#the-loop' },
+];
+---
+
+<header
+  class="mx-auto flex h-[68px] w-[min(100%-40px,620px)] items-center justify-between gap-6 border-b border-paper-400 wide:h-[76px] wide:w-[min(1310px,calc(100%-64px))]"
+>
+  <a
+    class="inline-flex items-center gap-2.5 text-[15px] font-bold tracking-[-0.04em]"
+    href={home}
+    aria-label={t('nav.home')}
+  >
+    <img
+      class="h-[25px] w-[25px] rounded-[7px] bg-ink-900 object-contain"
+      src="/brand/work-learn-mark.svg"
+      alt=""
+      aria-hidden="true"
+    />
+    <span>work learn</span>
+  </a>
+
+  <nav
+    class="ml-[72px] hidden gap-8 text-[13px] text-ink-600 wide:flex"
+    aria-label={t('nav.howItWorks')}
+  >
+    {
+      navItems.map((item) => (
+        <a class="transition-colors hover:text-ink-900" href={`${home}${item.hash}`}>
+          {t(item.key)}
+        </a>
+      ))
+    }
+  </nav>
+
+  <div class="flex items-center gap-4">
+    <a
+      class="font-mono text-[11px] text-ink-500 transition-colors hover:text-ink-900"
+      href={altPath}
+    >
+      {t('nav.langSwitch')}
+    </a>
+    <a class="group text-[13px] font-semibold transition-colors hover:text-ink-900" href={`${home}#get-started`}>
+      {t('nav.cta')}
+      <span
+        class="ml-[7px] inline-block transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        aria-hidden="true">↗</span
+      >
+    </a>
+  </div>
+</header>

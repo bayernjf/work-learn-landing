@@ -1,0 +1,80 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const rows = [
+  { number: '01', title: 'loop.01.title' as const, copy: 'loop.01.copy' as const, kind: 'extract' },
+  { number: '02', title: 'loop.02.title' as const, copy: 'loop.02.copy' as const, kind: 'context' },
+  { number: '03', title: 'loop.03.title' as const, copy: 'loop.03.copy' as const, kind: 'practice' },
+];
+---
+
+<section
+  class="mx-auto w-[min(100%-40px,620px)] py-24 wide:w-[min(1180px,calc(100%-64px))] wide:pt-[150px] wide:pb-[160px]"
+  id="the-loop"
+>
+  <div class="mb-13 wide:mb-18 wide:flex wide:items-end wide:justify-between wide:gap-12">
+    <h2 class="max-w-[550px] text-[clamp(2.6rem,5vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.07em]">
+      {t('loop.title')}
+    </h2>
+    <p class="mt-[26px] max-w-[430px] text-base leading-normal text-ink-500 wide:mt-0">
+      {t('loop.subtitle')}
+    </p>
+  </div>
+
+  <div class="border-t border-ink-900">
+    {
+      rows.map((row) => (
+        <article
+          class="grid grid-cols-[30px_1fr] items-center gap-3.5 border-b border-paper-400 py-7 wide:min-h-[154px] wide:grid-cols-[72px_1fr_310px] wide:gap-6 wide:py-0"
+        >
+          <span class="font-mono text-[11px] text-ink-400">{row.number}</span>
+          <div>
+            <h3 class="mb-2 text-xl tracking-[-0.04em]">{t(row.title)}</h3>
+            <p class="max-w-[430px] text-[13px] leading-[1.45] text-ink-500">{t(row.copy)}</p>
+          </div>
+          <div
+            class="col-start-2 w-full max-w-[310px] justify-self-start rounded-lg border border-paper-400 bg-paper-200 p-3.5 wide:col-start-auto wide:min-h-[66px] wide:w-[280px] wide:justify-self-end"
+            aria-hidden="true"
+          >
+            {row.kind === 'extract' && (
+              <>
+                <span class="my-2 block h-[5px] w-[40%] rounded-[3px] bg-paper-400" />
+                <span class="block w-max rounded-[3px] bg-brand-500 px-[7px] py-[3px] font-mono text-[11px] text-brand-900">
+                  decouple A from B
+                </span>
+                <span class="my-2 block h-[5px] w-[92%] rounded-[3px] bg-paper-400" />
+              </>
+            )}
+            {row.kind === 'context' && (
+              <>
+                <span class="mb-2 block font-mono text-[9px] uppercase text-ink-400">
+                  {t('loop.visual.contextLabel')}
+                </span>
+                <span class="font-mono text-[13px]">
+                  API layer <b class="font-normal text-brand-700">↔</b> queue
+                </span>
+              </>
+            )}
+            {row.kind === 'practice' && (
+              <>
+                <span class="mb-2 block font-mono text-[9px] uppercase text-ink-400">
+                  {t('loop.visual.practiceLabel')}
+                </span>
+                <span class="flex justify-between font-mono text-[13px]">
+                  {t('loop.visual.practice')} <b class="font-normal text-brand-700">→</b>
+                </span>
+              </>
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

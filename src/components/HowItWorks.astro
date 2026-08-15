@@ -1,0 +1,56 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const modes = [
+  { title: 'how.skill.title' as const, copy: 'how.skill.copy' as const, code: '整理刚才这段对话' },
+  { title: 'how.mcp.title' as const, copy: 'how.mcp.copy' as const, code: 'save_material()' },
+  { title: 'how.cli.title' as const, copy: 'how.cli.copy' as const, code: 'learn capture' },
+];
+---
+
+<section
+  class="mx-auto w-[min(100%-40px,620px)] py-24 wide:w-[min(1180px,calc(100%-64px))] wide:py-[150px]"
+  id="how-it-works"
+>
+  <div class="mb-13 max-w-[610px] wide:mb-18">
+    <h2 class="mb-5 text-[clamp(2.6rem,5vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.07em]">
+      {t('how.title')}
+    </h2>
+    <p class="max-w-[430px] text-base leading-normal text-ink-500">{t('how.subtitle')}</p>
+  </div>
+
+  <div class="grid grid-cols-1 border-t border-ink-900 wide:grid-cols-[1.35fr_1fr_1fr]">
+    {
+      modes.map((mode, index) => (
+        <article
+          class:list={[
+            'border-b border-paper-400 py-[22px] pb-[30px] wide:min-h-[290px] wide:border-r wide:border-b-0 wide:pt-[25px] wide:pr-7 wide:pb-6',
+            index === 0 ? 'wide:pl-0' : 'wide:pl-7',
+            index === modes.length - 1 ? 'border-b-0 wide:border-r-0' : '',
+          ]}
+        >
+          <div class="mb-[38px] font-mono text-[10px] text-ink-400 wide:mb-[67px]">0{index + 1}</div>
+          <h3 class="mb-3 text-[22px] tracking-[-0.05em]">{t(mode.title)}</h3>
+          <p class="mb-[27px] max-w-[240px] text-[13px] leading-normal text-ink-500 wide:min-h-[59px]">
+            {t(mode.copy)}
+          </p>
+          <code
+            class:list={[
+              'inline-block rounded-[5px] px-2.5 py-2 font-mono text-[11px]',
+              index === 0 ? 'bg-brand-500 text-brand-900' : 'bg-paper-300 text-ink-600',
+            ]}
+          >
+            {mode.code}
+          </code>
+        </article>
+      ))
+    }
+  </div>
+</section>
