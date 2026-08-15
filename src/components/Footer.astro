@@ -1,5 +1,8 @@
 ---
+import BayjfLink from '@bay/landing-ui/components/BayjfLink.astro';
+import StarOnGithub from '@bay/landing-ui/components/StarOnGithub.astro';
 import { useTranslations, localizePath, type Lang } from '../i18n';
+import { SOCIAL } from '../consts';
 
 interface Props {
   lang: Lang;
@@ -27,5 +30,9 @@ const home = localizePath('/', lang);
     <span>work learn</span>
   </a>
   <span>{t('footer.tagline')}</span>
+  <div class="flex items-center gap-[18px]">
+    <BayjfLink size={16} class="text-[11px] text-ink-400 transition-colors hover:text-ink-900" />
+    <StarOnGithub href={SOCIAL.github} size={14} class="inline-flex text-ink-400" />
+  </div>
   <span>{t('footer.rights')}</span>
 </footer>
