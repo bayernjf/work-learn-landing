@@ -1,0 +1,8 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Work Learn logo concept 02</title>
+  <desc id="desc">A W and L sharing one clear baseline.</desc>
+  <rect width="320" height="320" rx="72" fill="#171918"/>
+  <path d="M58 78L96 222L149 132L202 222L240 78" stroke="#B8F23E" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M202 222V242H94" stroke="#EAF4E8" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M202 222H240" stroke="#EAF4E8" stroke-width="14" stroke-linecap="round"/>
+</svg>

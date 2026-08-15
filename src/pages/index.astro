@@ -24,12 +24,13 @@ const featureRows = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Work Learn turns the English you use with AI into a personal course." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Work Learn - Learn from the work already happening</title>
   </head>
   <body>
     <header class="site-header">
       <a class="wordmark" href="/" aria-label="Work Learn home">
-        <span class="wordmark-mark" aria-hidden="true">W</span>
+        <img class="wordmark-mark" src="/brand/work-learn-mark.svg" alt="" aria-hidden="true" />
         <span>work learn</span>
       </a>
       <nav aria-label="Main navigation">
@@ -134,7 +135,7 @@ const featureRows = [
       </section>
     </main>
 
-    <footer class="site-footer shell"><a class="wordmark" href="/" aria-label="Work Learn home"><span class="wordmark-mark" aria-hidden="true">W</span><span>work learn</span></a><span>Language from the work.</span><span>© 2026 Work Learn</span></footer>
+    <footer class="site-footer shell"><a class="wordmark" href="/" aria-label="Work Learn home"><img class="wordmark-mark" src="/brand/work-learn-mark.svg" alt="" aria-hidden="true" /><span>work learn</span></a><span>Language from the work.</span><span>© 2026 Work Learn</span></footer>
   </body>
 </html>
 
@@ -148,6 +149,7 @@ const featureRows = [
   .site-header { height: 76px; width: min(1310px, calc(100% - 64px)); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
   .wordmark { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; letter-spacing: -.04em; }
   .wordmark-mark, .map-mark { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 7px; background: var(--ink); color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: -.1em; }
+  .wordmark-mark { object-fit: contain; }
   nav { display: flex; gap: 32px; margin-left: 72px; font-size: 13px; color: #505954; }
   nav a, .header-link, .text-link { transition: color .25s ease, transform .25s ease; }
   nav a:hover, .header-link:hover, .text-link:hover { color: var(--ink); }

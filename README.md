@@ -43,6 +43,8 @@ Agent 中调用 Skill -> 整理当前对话 -> 用户确认 -> MCP/API 保存 ->
 - 从真实对话到复习的学习闭环；
 - 面向开发者工作流的会话学习预览；
 - 响应式桌面和移动端布局。
+- Work Learn `W` 路径标志和浏览器图标。
+- 三个备用的 `W + L` Logo 方案，位于 `public/brand/concepts/`。
 
 ## 本地运行
 
@@ -62,5 +64,6 @@ npm run build
 - Astro
 - 原生 CSS
 - 静态 HTML 交互预览
+- SVG brand mark
 
 产品方案见 [work-learn](https://github.com/bayernjf/work-learn) 仓库。
