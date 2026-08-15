@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* 设计令牌：浅色纸感底 + 柠檬绿强调色，沿用首版落地页的手写视觉 */
+@theme {
+  --color-ink-50: #f0f3ef;
+  --color-ink-100: #e2e7e2;
+  --color-ink-200: #cbd4cc;
+  --color-ink-300: #aeb8b0;
+  --color-ink-400: #89938b;
+  --color-ink-500: #68706b;
+  --color-ink-600: #505954;
+  --color-ink-700: #354039;
+  --color-ink-800: #1b211f;
+  --color-ink-900: #171918;
+
+  /* 纸张底色与分隔线 */
+  --color-paper-50: #f8faf7;
+  --color-paper-100: #f3f5f1;
+  --color-paper-200: #edf1ec;
+  --color-paper-300: #e5ebe5;
+  --color-paper-400: #d7ded8;
+
+  /* 品牌色：柠檬绿，用于强调块与代码高亮 */
+  --color-brand-50: #f4fadf;
+  --color-brand-100: #e9f5c2;
+  --color-brand-200: #d5e6b4;
+  --color-brand-300: #cdf27e;
+  --color-brand-400: #c5f25c;
+  --color-brand-500: #b8f23e;
+  --color-brand-600: #9ed72a;
+  --color-brand-700: #799751;
+  --color-brand-800: #58624e;
+  --color-brand-900: #435334;
+
+  --font-sans: "Avenir Next", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+  --font-serif: Georgia, "Times New Roman", "Songti SC", serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-paper-100);
+  color: var(--color-ink-900);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
