@@ -90,6 +90,5 @@ public/
 ## 待补充
 
 - `public/og/og-zh.png` 与 `public/og/og-en.png`（1200×630）尚未生成，`consts.ts` 中的 `OG_IMAGE` 已指向该路径
-- 产品本体尚未部署线上服务，首屏产品入口按钮为置灰状态，上线后在 `consts.ts` 中补 `APP_URL` 并启用按钮
 
 产品方案见 [work-learn](https://github.com/bayernjf/work-learn) 仓库。

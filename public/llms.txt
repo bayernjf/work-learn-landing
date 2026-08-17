@@ -60,7 +60,7 @@ Agent 中调用 Skill -> 整理当前对话 -> 用户确认 -> MCP/API 保存 ->
 
 ## 当前状态
 
-产品仍在开发中，尚未提供线上服务，落地页的产品入口按钮暂为置灰状态。第一版面向使用 AI Agent 做全栈开发的独立开发者。
+产品已完成第一版 MVP 核心闭环：Skill / MCP / CLI 三层接入、语料保存与搜索、每日复习，以及 Web 端的注册登录与语料库。Web 端（React + Vite）已部署到 Cloudflare Pages，API（Hono）已部署到 Vercel。第一版面向使用 AI Agent 做全栈开发的独立开发者。
 
 ## 非目标
 

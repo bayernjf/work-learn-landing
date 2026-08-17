@@ -60,7 +60,7 @@ deliberate trigger -> least privilege -> local first -> redact by default -> con
 
 ## Current Status
 
-The product is still under development and no hosted service is available yet, so the product entry button on this site is greyed out. The first version targets solo developers doing full-stack work with AI agents.
+The first-version MVP core loop is complete: the Skill / MCP / CLI three-layer entry, corpus save and search, daily review, and web registration, login, and corpus browsing. The web app (React + Vite) is deployed on Cloudflare Pages and the API (Hono) on Vercel. The first version targets solo developers doing full-stack work with AI agents.
 
 ## Non-Goals
 
