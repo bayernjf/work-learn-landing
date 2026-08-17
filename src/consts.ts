@@ -15,8 +15,9 @@ export const AUTHOR = 'Work Learn';
 export const LOCALES = ['zh', 'en'] as const;
 export const DEFAULT_LOCALE = 'en';
 
-// 社交与外部链接
-// 产品本体尚未部署线上服务，因此不提供 APP_URL，落地页入口按钮置灰
+// 产品 Web 端与入口地址
+export const APP_URL = 'https://work-learn-web.pages.dev';
+
 export const SOCIAL = {
   github: 'https://github.com/bayernjf/work-learn',
   email: 'b4yernjf@gmail.com',
