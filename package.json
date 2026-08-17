@@ -1,13 +1,29 @@
 {
   "name": "work-learn-landing",
-  "private": true,
   "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "astro build && node scripts/shot.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro",
+    "shot": "node scripts/shot.mjs"
   },
   "dependencies": {
-    "astro": "^5.0.0"
+    "@astrojs/sitemap": "^3.7.3",
+    "@bay/landing-ui": "github:bayernjf/landing-ui#v1.5.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.0",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "playwright": "^1.62.1",
+    "typescript": "^5.8.2"
   }
 }

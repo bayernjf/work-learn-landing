@@ -1,0 +1,119 @@
+---
+// 统一 SEO head：meta、canonical、OG、Twitter、hreflang、JSON-LD
+// 结构化数据覆盖：Organization / WebSite / SoftwareApplication
+// 支持 extraSchema prop 注入页面级 schema（HowTo / TechArticle / BreadcrumbList）
+import { SITE_URL, SITE_NAME, AUTHOR, OG_IMAGE, SOCIAL } from '../consts';
+import { localizePath, type Lang } from '../i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  pathname: string;
+  ogImage?: string;
+  extraSchema?: object | object[];
+}
+
+const { title, description, lang, pathname, ogImage, extraSchema } = Astro.props;
+
+// 标准化 base path：去掉语言前缀，得到语言无关的基础路径
+const segments = pathname.split('/').filter(Boolean);
+if (segments[0] === 'zh') segments.shift();
+const basePath = segments.length > 0 ? `/${segments.join('/')}` : '/';
+
+const canonical = `${SITE_URL.replace(/\/$/, '')}${pathname === '/' ? '/' : pathname}`;
+const zhUrl = `${SITE_URL.replace(/\/$/, '')}${localizePath(basePath, 'zh')}`;
+const enUrl = `${SITE_URL.replace(/\/$/, '')}${localizePath(basePath, 'en')}`;
+const image = ogImage ?? (lang === 'zh' ? OG_IMAGE.zh : OG_IMAGE.en);
+const imageUrl = image.startsWith('http') ? image : `${SITE_URL.replace(/\/$/, '')}${image}`;
+
+// Organization：站点级实体
+const organizationSchema = {
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL.replace(/\/$/, '')}/brand/work-learn-mark.svg`,
+  sameAs: [SOCIAL.github],
+};
+
+// WebSite：声明站点实体
+const websiteSchema = {
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: SITE_URL,
+  inLanguage: lang === 'zh' ? 'zh-CN' : 'en-US',
+  publisher: { '@type': 'Organization', name: SITE_NAME },
+};
+
+// SoftwareApplication：产品实体定义，AI 搜索识别“这是什么产品”
+const softwareSchema = {
+  '@type': 'SoftwareApplication',
+  name: SITE_NAME,
+  applicationCategory: 'EducationalApplication',
+  operatingSystem: 'Web, CLI',
+  description,
+  url: SITE_URL,
+  author: { '@type': 'Organization', name: AUTHOR },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  featureList: [
+    'Universal Learning Skill for any AI agent',
+    'MCP and API layer for saving, searching and reviewing material',
+    'CLI capture for terminal sessions',
+    'Expressions extracted from real working conversations',
+    'Short practice generated from your own codebase context',
+    'Review loop that records what you already master',
+  ],
+};
+
+const allSchemas: object[] = [organizationSchema, websiteSchema, softwareSchema];
+if (extraSchema) {
+  if (Array.isArray(extraSchema)) allSchemas.push(...extraSchema);
+  else allSchemas.push(extraSchema);
+}
+
+// Graph 形式输出，便于 AI 一次性解析实体关系
+const graphSchema = {
+  '@context': 'https://schema.org',
+  '@graph': allSchemas,
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content={AUTHOR} />
+<meta
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+<link rel="canonical" href={canonical} />
+
+<!-- hreflang 双语互指 -->
+<link rel="alternate" hreflang="zh-CN" href={zhUrl} />
+<link rel="alternate" hreflang="en-US" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={enUrl} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_US'} />
+<meta property="og:locale:alternate" content={lang === 'zh' ? 'en_US' : 'zh_CN'} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<!-- JSON-LD: 聚合 graph（Organization + WebSite + SoftwareApplication + 页面级） -->
+<script type="application/ld+json" set:html={JSON.stringify(graphSchema)} />

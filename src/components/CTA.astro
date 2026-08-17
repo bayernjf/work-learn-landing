@@ -1,0 +1,38 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+import { SOCIAL } from '../consts';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section
+  class="mx-auto grid w-[min(100%-40px,620px)] grid-cols-1 gap-9 border-t border-paper-400 pt-[90px] pb-[100px] wide:w-[min(1180px,calc(100%-64px))] wide:grid-cols-[1.25fr_0.75fr] wide:gap-20 wide:pt-[116px] wide:pb-[132px]"
+  id="get-started"
+>
+  <div>
+    <p class="mb-[22px] font-mono text-[10px] font-semibold uppercase leading-none tracking-[0.16em] text-ink-600">
+      {t('cta.eyebrow')}
+    </p>
+    <h2 class="max-w-[600px] text-[clamp(2.6rem,5vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.07em]">
+      {t('cta.title')}
+    </h2>
+  </div>
+  <div class="wide:self-end">
+    <p class="mb-7 max-w-[430px] text-base leading-normal text-ink-500">{t('cta.copy')}</p>
+    <a
+      class="group inline-flex min-h-12 items-center justify-center rounded-lg bg-ink-900 px-[19px] text-[13px] font-bold text-paper-50 transition hover:-translate-y-0.5 hover:bg-ink-700"
+      href={`mailto:${SOCIAL.email}`}
+    >
+      {t('cta.button')}
+      <span
+        class="ml-[7px] inline-block transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        aria-hidden="true">↗</span
+      >
+    </a>
+  </div>
+</section>

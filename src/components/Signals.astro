@@ -1,0 +1,25 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const agents = ['Claude', 'ChatGPT', 'Hermes', 'OpenClaw'];
+---
+
+<section
+  class="mx-auto w-[min(100%-40px,620px)] border-y border-paper-400 py-6 font-mono text-[10px] leading-8 uppercase tracking-[0.08em] text-ink-400 wide:flex wide:w-[min(1180px,calc(100%-64px))] wide:items-center wide:justify-between wide:leading-normal"
+  aria-label={t('signals.label')}
+>
+  <span>{t('signals.label')}</span>
+  <div
+    class="flex flex-wrap items-center gap-x-[22px] gap-y-2 font-sans text-[13px] font-semibold normal-case tracking-[-0.02em] text-ink-700 wide:gap-[clamp(16px,3.2vw,46px)]"
+  >
+    {agents.map((agent) => <span>{agent}</span>)}
+    <span>{t('signals.terminal')}</span>
+  </div>
+</section>

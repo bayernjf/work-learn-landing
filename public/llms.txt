@@ -1,0 +1,71 @@
+# Work Learn
+
+> Work Learn 是一个跨 AI Agent 的个人英语语料学习系统。它把你与 Claude、ChatGPT、Hermes、OpenClaw 等 Agent 的真实工作对话，转化为可复用、可搜索、可复习的英语学习材料。Work Learn 不是又一个单词 App，也不是通用笔记工具，而是把每天已经发生的 AI 工作对话变成属于你自己的英语课程。
+
+## 产品定义
+
+Work Learn 属于跨 Agent 的个人语料学习系统。用户负责在对话中主动触发整理，Work Learn 负责理解对话、提取值得学的表达、保存进语料库并安排复习。Work Learn 可以保证材料来自你真实的工作语境，不会替你自动全量监听或上传对话。
+
+## 三层接入
+
+- Universal Learning Skill：主入口。在支持 Skill 的 Agent 中直接整理当前对话，用户确认后保存。
+- MCP / API：统一能力层。负责保存、搜索、复习和跨 Agent 同步，Skill 与外部工具都通过它读写。
+- CLI 与本地 Companion：兼容层。覆盖终端会话与没有 Skill 支持的场景。
+
+## 核心闭环
+
+```text
+Agent 中调用 Skill -> 整理当前对话 -> 用户确认 -> MCP/API 保存 -> Web 查看和复习
+```
+
+## 核心能力
+
+- 从真实工作对话中提取表达，而不是脱离场景的词表
+- 每条材料保留原始语境：你当时在做什么、对方怎么说
+- 跨 Agent 共用一套语料库，换模型不丢材料
+- 语料搜索与每日复习，围绕重复出现的错误安排
+- 首版 API 边界清晰：`save_material`、`search_corpus`、`get_review_items`
+
+## 差异化
+
+1. 语料来自工作现场：学的就是你明天还要再用一次的表达。
+2. 跨 Agent 不绑定平台：Claude、ChatGPT、Hermes、OpenClaw 共用一个语料库。
+3. 三层接入：Skill 为主入口，MCP/API 为能力层，CLI 覆盖终端。
+4. 主动触发：默认不监听、不上传全量对话，保存前必须确认。
+5. 少而准：推荐少量高价值内容，而不是制造更多笔记。
+
+## 技术栈
+
+- Web：React + Vite，部署在 Cloudflare Pages
+- API：Hono，部署为 Vercel Functions
+- 数据与认证：Supabase Auth + Postgres + RLS + Storage
+- 校验：请求与响应统一通过 `@work-learn/shared-schema`
+- 结构：pnpm monorepo，`apps/api` 与 `apps/web` 分离部署
+
+## 关键链接
+
+- [中文首页](https://work-learn.bayjf.com/zh/)
+- [English Home](https://work-learn.bayjf.com/)
+- [三种接入方式](https://work-learn.bayjf.com/zh/#how-it-works)
+- [跨 Agent 支持](https://work-learn.bayjf.com/zh/#every-agent)
+- [学习闭环](https://work-learn.bayjf.com/zh/#the-loop)
+- [GitHub 仓库](https://github.com/bayernjf/work-learn)
+- [产品方案](https://github.com/bayernjf/work-learn/blob/main/docs/product-proposal.md)
+
+## 设计原则
+
+```text
+主动触发 -> 最小权限 -> 本地优先 -> 默认脱敏 -> 保存前确认
+```
+
+## 当前状态
+
+产品已完成第一版 MVP 核心闭环：Skill / MCP / CLI 三层接入、语料保存与搜索、每日复习，以及 Web 端的注册登录与语料库。Web 端（React + Vite）已部署到 Cloudflare Pages，API（Hono）已部署到 Vercel。第一版面向使用 AI Agent 做全栈开发的独立开发者。
+
+## 非目标
+
+- 不做通用单词 App 或词库背诵工具
+- 不绑定某一个 AI 平台
+- 不默认全量监听与上传对话
+- 不让 Skill 直接读写数据库
+- 不在桌面端重复实现语料库与复习逻辑
