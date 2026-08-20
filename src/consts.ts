@@ -20,6 +20,7 @@ export const APP_URL = 'https://work-learn-web.pages.dev';
 
 export const SOCIAL = {
   github: 'https://github.com/bayernjf/work-learn',
+  rawBase: 'https://raw.githubusercontent.com/bayernjf/work-learn/main',
   email: 'b4yernjf@gmail.com',
   docs: 'https://github.com/bayernjf/work-learn/blob/main/docs/product-proposal.md',
 };

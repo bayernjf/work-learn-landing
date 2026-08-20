@@ -1,6 +1,6 @@
 ---
 import { useTranslations, type Lang } from '../i18n';
-import { SOCIAL } from '../consts';
+import { APP_URL, SOCIAL } from '../consts';
 
 interface Props {
   lang: Lang;
@@ -8,31 +8,215 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+const skillUrl = `${SOCIAL.github}/blob/main/skills/work-learn/SKILL.md`;
+const docsUrl = `${SOCIAL.github}/blob/main/docs/mcp-agent-setup.md`;
+const skillRawUrl = `${SOCIAL.rawBase}/skills/work-learn/SKILL.md`;
+const universalInstallCommand = `curl -fsSL ${SOCIAL.rawBase}/scripts/install-skill.sh | bash`;
+
+const skillInstalls = [
+  { id: 'universal', label: t('cta.agent.universal'), command: universalInstallCommand, note: t('cta.agent.universal.note') },
+  { id: 'codex', label: t('cta.agent.codex'), command: `mkdir -p ~/.codex/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.codex/skills/work-learn/SKILL.md`, note: t('cta.agent.codex.note') },
+  { id: 'claude', label: t('cta.agent.claude'), command: `mkdir -p ~/.claude/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.claude/skills/work-learn/SKILL.md`, note: t('cta.agent.claude.note') },
+  { id: 'codebuddy', label: t('cta.agent.codebuddy'), command: `mkdir -p ~/.codebuddy/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.codebuddy/skills/work-learn/SKILL.md`, note: t('cta.agent.codebuddy.note') },
+  { id: 'cursor', label: t('cta.agent.cursor'), command: `mkdir -p ~/.cursor/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.cursor/skills/work-learn/SKILL.md`, note: t('cta.agent.cursor.note') },
+  { id: 'opencode', label: t('cta.agent.opencode'), command: `mkdir -p ~/.config/opencode/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.config/opencode/skills/work-learn/SKILL.md`, note: t('cta.agent.opencode.note') },
+] as const;
+
+const mcpConfig = `{
+  "mcpServers": {
+    "work-learn": {
+      "command": "pnpm",
+      "args": ["--filter", "@work-learn/mcp-server", "exec", "tsx", "src/server.ts"],
+      "cwd": "/path/to/work-learn",
+      "env": {
+        "WORK_LEARN_API_URL": "https://work-learn-api.vercel.app",
+        "WORK_LEARN_ACCESS_TOKEN": "<paste-your-token>"
+      }
+    }
+  }
+}`;
+
+const steps = [
+  { n: '1', title: t('cta.step1.title'), copy: t('cta.step1.copy') },
+  { n: '2', title: t('cta.step2.title'), copy: t('cta.step2.copy') },
+] as const;
 ---
 
 <section
-  class="mx-auto grid w-[min(100%-40px,620px)] grid-cols-1 gap-9 border-t border-paper-400 pt-[90px] pb-[100px] wide:w-[min(1180px,calc(100%-64px))] wide:grid-cols-[1.25fr_0.75fr] wide:gap-20 wide:pt-[116px] wide:pb-[132px]"
+  class="bg-ink-900 text-paper-50"
   id="get-started"
 >
-  <div>
-    <p class="mb-[22px] font-mono text-[10px] font-semibold uppercase leading-none tracking-[0.16em] text-ink-600">
-      {t('cta.eyebrow')}
-    </p>
-    <h2 class="max-w-[600px] text-[clamp(2.6rem,5vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.07em]">
-      {t('cta.title')}
-    </h2>
-  </div>
-  <div class="wide:self-end">
-    <p class="mb-7 max-w-[430px] text-base leading-normal text-ink-500">{t('cta.copy')}</p>
-    <a
-      class="group inline-flex min-h-12 items-center justify-center rounded-lg bg-ink-900 px-[19px] text-[13px] font-bold text-paper-50 transition hover:-translate-y-0.5 hover:bg-ink-700"
-      href={`mailto:${SOCIAL.email}`}
-    >
-      {t('cta.button')}
-      <span
-        class="ml-[7px] inline-block transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-        aria-hidden="true">↗</span
-      >
-    </a>
+  <div
+    class="mx-auto grid w-[min(100%-40px,620px)] grid-cols-1 gap-12 py-[90px] wide:w-[min(1180px,calc(100%-64px))] wide:grid-cols-[1fr_1fr] wide:gap-20 wide:py-[132px]"
+  >
+    <div>
+      <p class="mb-[22px] font-mono text-[10px] font-semibold uppercase leading-none tracking-[0.16em] text-brand-400">
+        {t('cta.eyebrow')}
+      </p>
+      <h2 class="max-w-[600px] text-[clamp(2.6rem,5vw,4.75rem)] font-bold leading-[0.96] tracking-[-0.07em]">
+        {t('cta.title')}
+      </h2>
+      <p class="mt-7 max-w-[430px] text-base leading-normal text-paper-300">{t('cta.copy')}</p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a
+          class="group inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-500 px-[18px] text-[13px] font-bold text-brand-900 transition hover:-translate-y-0.5 hover:bg-brand-400"
+          href={APP_URL}
+        >
+          {t('hero.cta.app')}
+          <span class="ml-[7px] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true">↗</span>
+        </a>
+        <a
+          class="inline-flex min-h-11 items-center justify-center rounded-lg border border-paper-200/30 px-[18px] text-[13px] font-bold text-paper-50 transition hover:-translate-y-0.5 hover:border-paper-100"
+          href={skillUrl}
+        >
+          {t('cta.skill')}
+        </a>
+        <a
+          class="inline-flex min-h-11 items-center justify-center px-[10px] text-[13px] font-semibold text-paper-300 underline-offset-4 transition hover:text-paper-50 hover:underline"
+          href={docsUrl}
+        >
+          {t('cta.docs')}
+        </a>
+      </div>
+    </div>
+
+    <div class="wide:self-end">
+      <ol class="mb-8 space-y-6">
+        {steps.map((step) => (
+          <li class="flex gap-4">
+            <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-500 font-mono text-[12px] font-bold text-brand-900">
+              {step.n}
+            </span>
+            <div>
+              <h3 class="text-[16px] font-semibold text-paper-50">{step.title}</h3>
+              <p class="mt-1 text-[13px] leading-relaxed text-paper-300">{step.copy}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <details class="group rounded-xl border border-paper-200/15 bg-ink-800/60 open:bg-ink-800">
+        <summary
+          class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-[13px] font-semibold text-paper-100 marker:content-none"
+        >
+          <span>{t('cta.advanced')}</span>
+          <span class="font-mono text-[11px] text-paper-400 transition-transform group-open:rotate-90" aria-hidden="true">→</span>
+        </summary>
+
+        <div class="border-t border-paper-200/10 px-4 py-5">
+          <p class="mb-3 text-[13px] leading-relaxed text-paper-300">{t('cta.step3.title')}</p>
+          <p class="text-[12px] leading-relaxed text-paper-400">{t('cta.step3.copy')}</p>
+          <p class="mt-2 text-[12px] leading-relaxed text-paper-400">{t('cta.step3.prereq')}</p>
+          <p class="mt-4 text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-400">{t('cta.step3.install')}</p>
+
+          <div class="mt-2 overflow-hidden rounded-lg border border-paper-200/15 bg-ink-900/50">
+            <div class="flex gap-1 overflow-x-auto border-b border-paper-200/10 p-1" role="tablist" aria-label="Skill install agents">
+              {skillInstalls.map((agent, index) => (
+                <button
+                  type="button"
+                  class="skill-tab shrink-0 rounded-md px-3 py-1.5 font-mono text-[11px] font-semibold transition"
+                  class:list={[
+                    index === 0 ? 'bg-brand-500 text-brand-900' : 'text-paper-300 hover:bg-paper-200/10 hover:text-paper-50',
+                  ]}
+                  role="tab"
+                  id={`skill-tab-${agent.id}`}
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                  aria-controls={`skill-panel-${agent.id}`}
+                  data-tab-target={agent.id}
+                >
+                  {agent.label}
+                </button>
+              ))}
+            </div>
+            {skillInstalls.map((agent, index) => (
+              <div
+                class={index === 0 ? 'block' : 'hidden'}
+                id={`skill-panel-${agent.id}`}
+                role="tabpanel"
+                aria-labelledby={`skill-tab-${agent.id}`}
+                data-tab-panel={agent.id}
+              >
+                <div class="flex items-center gap-2 px-3 py-2.5">
+                  <code class="flex-1 overflow-x-auto whitespace-nowrap font-mono text-[10.5px] text-paper-200">{agent.command}</code>
+                  <button
+                    type="button"
+                    class="mcp-copy shrink-0 rounded-md px-2 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
+                    data-copy-target={`skill-cmd-${agent.id}`}
+                    data-copy-label={t('cta.config.copy')}
+                    data-copied-label={t('cta.config.copied')}
+                  >
+                    {t('cta.config.copy')}
+                  </button>
+                </div>
+                <pre id={`skill-cmd-${agent.id}`} class="hidden">{agent.command}</pre>
+                <p class="border-t border-paper-200/10 px-3 py-2 text-[11px] leading-relaxed text-paper-400">{agent.note}</p>
+              </div>
+            ))}
+          </div>
+          <p class="mt-2 text-[11px] leading-relaxed text-paper-500">{t('cta.step3.chooseAgent')}</p>
+          <p class="mt-2 rounded-md bg-ink-900/60 px-3 py-2 font-mono text-[10px] leading-relaxed text-paper-400">
+            {t('cta.step3.paths')}
+          </p>
+          <p class="mt-2 text-[12px] leading-relaxed text-paper-400">{t('cta.step3.usage')}</p>
+          <p class="mt-1 text-[12px] leading-relaxed text-paper-500">{t('cta.step3.without')}</p>
+
+          <p class="mt-5 mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-400">{t('cta.config.label')}</p>
+          <div class="overflow-hidden rounded-lg border border-paper-200/15 bg-ink-900/50">
+            <div class="flex items-center justify-between border-b border-paper-200/10 px-4 py-2.5">
+              <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-paper-400">mcp.json</span>
+              <button
+                type="button"
+                class="mcp-copy rounded-md px-2.5 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
+                data-copy-target="mcp-config"
+                data-copy-label={t('cta.config.copy')}
+                data-copied-label={t('cta.config.copied')}
+              >
+                {t('cta.config.copy')}
+              </button>
+            </div>
+            <pre id="mcp-config" class="overflow-x-auto px-4 py-3.5 font-mono text-[11px] leading-[1.6] text-paper-200">{mcpConfig}</pre>
+          </div>
+          <p class="mt-3 text-[12px] leading-relaxed text-paper-500">{t('cta.tokenNote')}</p>
+        </div>
+      </details>
+    </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.mcp-copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.copyTarget;
+      const el = id ? document.getElementById(id) : null;
+      if (!el) return;
+      try {
+        await navigator.clipboard.writeText(el.textContent ?? '');
+        const original = btn.dataset.copyLabel ?? btn.textContent;
+        btn.textContent = btn.dataset.copiedLabel ?? 'Copied';
+        setTimeout(() => { btn.textContent = original; }, 1800);
+      } catch { /* clipboard unavailable; silently ignore */ }
+    });
+  });
+
+  const skillTabs = document.querySelectorAll<HTMLButtonElement>('.skill-tab');
+  const skillPanels = document.querySelectorAll<HTMLElement>('[data-tab-panel]');
+  skillTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tabTarget;
+      if (!target) return;
+      skillTabs.forEach((item) => {
+        const active = item === tab;
+        item.classList.toggle('bg-brand-500', active);
+        item.classList.toggle('text-brand-900', active);
+        item.classList.toggle('text-paper-300', !active);
+        item.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      skillPanels.forEach((panel) => {
+        const active = panel.dataset.tabPanel === target;
+        panel.classList.toggle('hidden', !active);
+        panel.classList.toggle('block', active);
+      });
+    });
+  });
+</script>
