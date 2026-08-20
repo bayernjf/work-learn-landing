@@ -16,7 +16,7 @@ export const LOCALES = ['zh', 'en'] as const;
 export const DEFAULT_LOCALE = 'en';
 
 // 产品 Web 端与入口地址
-export const APP_URL = 'https://work-learn-web.pages.dev';
+export const APP_URL = 'https://work-learn.pages.dev';
 
 export const SOCIAL = {
   github: 'https://github.com/bayernjf/work-learn',
