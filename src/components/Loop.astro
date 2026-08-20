@@ -16,7 +16,7 @@ const rows = [
 ---
 
 <section
-  class="border-y border-paper-400 bg-paper-200/60 py-[88px] wide:py-[132px]"
+  class="border-y border-paper-400 bg-paper-200 py-[72px] wide:bg-paper-200/60 wide:py-[132px]"
   id="the-loop"
 >
   <div class="mx-auto w-[min(100%-40px,620px)] text-center wide:w-[min(1180px,calc(100%-64px))]">
@@ -29,11 +29,11 @@ const rows = [
     <p class="mx-auto mt-6 max-w-[480px] text-base leading-normal text-ink-500">{t('loop.subtitle')}</p>
 
     <ol
-      class="mt-14 grid grid-cols-1 divide-y divide-paper-400 text-left wide:mt-20 wide:grid-cols-3 wide:divide-x wide:divide-y-0"
+      class="mt-12 grid grid-cols-1 gap-4 text-left wide:mt-20 wide:grid-cols-3 wide:gap-0 wide:divide-x wide:divide-paper-400"
     >
       {
         rows.map((row) => (
-          <li class="px-0 py-9 wide:px-9 wide:py-2 wide:first:pl-0 wide:last:pr-0">
+          <li class="rounded-xl border border-paper-400 bg-white px-5 py-7 wide:rounded-none wide:border-0 wide:bg-transparent wide:px-9 wide:py-2 wide:first:pl-0 wide:last:pr-0">
             <div class="mb-8 font-mono text-[11px] font-semibold tracking-[0.1em] text-brand-700">
               {row.number}
             </div>
