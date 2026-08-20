@@ -9,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const skillUrl = `${SOCIAL.github}/blob/main/SKILL.md`;
+const skillUrl = `${SOCIAL.github}/blob/main/skills/work-learn/SKILL.md`;
 const docsUrl = `${SOCIAL.github}/blob/main/docs/mcp-agent-setup.md`;
 
 const mcpConfig = `{
@@ -90,6 +90,19 @@ const steps = [
           <h3 class="text-[15px] font-semibold text-ink-900">{t('cta.step3.title')}</h3>
           <p class="mt-1 text-[13px] leading-relaxed text-ink-500">{t('cta.step3.copy')}</p>
           <p class="mt-2 text-[12px] leading-relaxed text-ink-400">{t('cta.step3.prereq')}</p>
+          <p class="mt-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-500">{t('cta.step3.install')}</p>
+          <div class="mt-1.5 flex items-center gap-2 rounded-lg border border-paper-400 bg-paper-200 px-3 py-2">
+            <code id="skill-install-cmd" class="flex-1 overflow-x-auto whitespace-nowrap font-mono text-[11px] text-ink-700">curl -fsSL https://raw.githubusercontent.com/bayernjf/work-learn/main/scripts/install-skill.sh | bash</code>
+            <button
+              type="button"
+              class="mcp-copy shrink-0 rounded-md px-2 py-1 font-mono text-[11px] font-semibold text-ink-600 transition hover:bg-paper-300 hover:text-ink-900"
+              data-copy-target="skill-install-cmd"
+              data-copy-label={t('cta.config.copy')}
+              data-copied-label={t('cta.config.copied')}
+            >
+              {t('cta.config.copy')}
+            </button>
+          </div>
           <p class="mt-2 rounded-md bg-paper-200 px-3 py-2 font-mono text-[10.5px] leading-relaxed text-ink-600">
             {t('cta.step3.paths')}
           </p>
