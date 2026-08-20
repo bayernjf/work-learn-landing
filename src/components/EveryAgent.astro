@@ -15,11 +15,11 @@ const channels = [
 ] as const;
 ---
 
-<section class="relative overflow-hidden bg-ink-900 text-paper-50" id="every-agent">
+<section class="relative overflow-hidden bg-ink-900 text-paper-50" id="every-agent" data-wl-reveal>
   <!-- ambient grid + glow -->
   <div class="pointer-events-none absolute inset-0 opacity-[0.5]" aria-hidden="true"
     style="background-image:linear-gradient(to right,rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 30%,transparent 75%);"></div>
-  <div class="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
+  <div class="wl-glow pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
     style="background:radial-gradient(closest-side,rgba(184,242,62,0.16),transparent 70%);"></div>
 
   <div
@@ -38,7 +38,7 @@ const channels = [
       <!-- central core -->
       <div class="relative mx-auto flex w-full max-w-[360px] flex-col items-center">
         <div
-          class="relative z-10 flex w-full flex-col items-center rounded-2xl border border-white/10 bg-[#1d241f] px-8 py-9 text-center shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
+          class="wl-core relative z-10 flex w-full flex-col items-center rounded-2xl border border-white/10 bg-[#1d241f] px-8 py-9 text-center shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
         >
           <span class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent"></span>
           <img
@@ -55,7 +55,7 @@ const channels = [
         </div>
 
         <!-- connector stem (desktop) -->
-        <svg class="pointer-events-none absolute top-0 left-1/2 z-0 hidden h-full w-[560px] -translate-x-1/2 wide:block" viewBox="0 0 560 360" fill="none" aria-hidden="true">
+        <svg class="wl-stem pointer-events-none absolute top-0 left-1/2 z-0 hidden h-full w-[560px] -translate-x-1/2 wide:block" viewBox="0 0 560 360" fill="none" aria-hidden="true">
           <path d="M280 70 L280 150" stroke="url(#stemFade)" stroke-width="1.5" />
           <path d="M280 150 L120 250" stroke="url(#stemFade)" stroke-width="1.5" />
           <path d="M280 150 L440 250" stroke="url(#stemFade)" stroke-width="1.5" />
@@ -75,7 +75,7 @@ const channels = [
         <div class="relative z-10 mt-10 grid w-full grid-cols-1 gap-3 wide:-mt-2 wide:grid-cols-3 wide:gap-4">
           {channels.map((c) => (
             <div
-              class="group flex flex-col gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-4 transition-colors hover:border-brand-400/40 hover:bg-white/[0.05]"
+              class="wl-channel group flex flex-col gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-4 transition-colors hover:border-brand-400/40 hover:bg-white/[0.05]"
             >
               <div class="flex items-center justify-between">
                 <span class="grid h-7 w-7 place-items-center rounded-md bg-brand-500/15 font-mono text-[12px] font-bold text-brand-300 ring-1 ring-inset ring-brand-400/25">
@@ -92,3 +92,26 @@ const channels = [
     </div>
   </div>
 </section>
+
+<script>
+  document.documentElement.classList.add('wl-js');
+  const root = document.querySelector('[data-wl-reveal]');
+  if (root) {
+    if (!('IntersectionObserver' in window) || root.getBoundingClientRect().top < window.innerHeight) {
+      root.classList.add('is-visible');
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              root.classList.add('is-visible');
+              io.disconnect();
+            }
+          }
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(root);
+    }
+  }
+</script>
