@@ -11,6 +11,53 @@ const t = useTranslations(lang);
 
 const skillUrl = `${SOCIAL.github}/blob/main/skills/work-learn/SKILL.md`;
 const docsUrl = `${SOCIAL.github}/blob/main/docs/mcp-agent-setup.md`;
+const skillRawUrl = `${SOCIAL.rawBase}/skills/work-learn/SKILL.md`;
+const universalInstallCommand = `curl -fsSL ${SOCIAL.rawBase}/scripts/install-skill.sh | bash`;
+
+const skillInstalls = [
+  {
+    id: 'universal',
+    label: t('cta.agent.universal'),
+    command: universalInstallCommand,
+    note: t('cta.agent.universal.note'),
+  },
+  {
+    id: 'codex',
+    label: t('cta.agent.codex'),
+    command: `mkdir -p ~/.codex/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.codex/skills/work-learn/SKILL.md`,
+    note: t('cta.agent.codex.note'),
+  },
+  {
+    id: 'claude',
+    label: t('cta.agent.claude'),
+    command: `mkdir -p ~/.claude/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.claude/skills/work-learn/SKILL.md`,
+    note: t('cta.agent.claude.note'),
+  },
+  {
+    id: 'codebuddy',
+    label: t('cta.agent.codebuddy'),
+    command: `mkdir -p ~/.codebuddy/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.codebuddy/skills/work-learn/SKILL.md`,
+    note: t('cta.agent.codebuddy.note'),
+  },
+  {
+    id: 'cursor',
+    label: t('cta.agent.cursor'),
+    command: `mkdir -p ~/.cursor/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.cursor/skills/work-learn/SKILL.md`,
+    note: t('cta.agent.cursor.note'),
+  },
+  {
+    id: 'opencode',
+    label: t('cta.agent.opencode'),
+    command: `mkdir -p ~/.config/opencode/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.config/opencode/skills/work-learn/SKILL.md`,
+    note: t('cta.agent.opencode.note'),
+  },
+  {
+    id: 'pi',
+    label: t('cta.agent.pi'),
+    command: `mkdir -p ~/.pi/agent/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.pi/agent/skills/work-learn/SKILL.md`,
+    note: t('cta.agent.pi.note'),
+  },
+] as const;
 
 const mcpConfig = `{
   "mcpServers": {
@@ -91,18 +138,53 @@ const steps = [
           <p class="mt-1 text-[13px] leading-relaxed text-ink-500">{t('cta.step3.copy')}</p>
           <p class="mt-2 text-[12px] leading-relaxed text-ink-400">{t('cta.step3.prereq')}</p>
           <p class="mt-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-500">{t('cta.step3.install')}</p>
-          <div class="mt-1.5 flex items-center gap-2 rounded-lg border border-paper-400 bg-paper-200 px-3 py-2">
-            <code id="skill-install-cmd" class="flex-1 overflow-x-auto whitespace-nowrap font-mono text-[11px] text-ink-700">curl -fsSL https://raw.githubusercontent.com/bayernjf/work-learn/main/scripts/install-skill.sh | bash</code>
-            <button
-              type="button"
-              class="mcp-copy shrink-0 rounded-md px-2 py-1 font-mono text-[11px] font-semibold text-ink-600 transition hover:bg-paper-300 hover:text-ink-900"
-              data-copy-target="skill-install-cmd"
-              data-copy-label={t('cta.config.copy')}
-              data-copied-label={t('cta.config.copied')}
-            >
-              {t('cta.config.copy')}
-            </button>
+          <div class="mt-1.5 overflow-hidden rounded-xl border border-paper-400 bg-paper-200">
+            <div class="flex gap-1 overflow-x-auto border-b border-paper-400 p-1" role="tablist" aria-label="Skill install agents">
+              {skillInstalls.map((agent, index) => (
+                <button
+                  type="button"
+                  class="skill-tab shrink-0 rounded-lg px-3 py-1.5 font-mono text-[11px] font-semibold transition"
+                  class:list={[
+                    index === 0
+                      ? 'bg-ink-900 text-paper-50'
+                      : 'text-ink-600 hover:bg-paper-300 hover:text-ink-900',
+                  ]}
+                  role="tab"
+                  id={`skill-tab-${agent.id}`}
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                  aria-controls={`skill-panel-${agent.id}`}
+                  data-tab-target={agent.id}
+                >
+                  {agent.label}
+                </button>
+              ))}
+            </div>
+            {skillInstalls.map((agent, index) => (
+              <div
+                class={index === 0 ? 'block' : 'hidden'}
+                id={`skill-panel-${agent.id}`}
+                role="tabpanel"
+                aria-labelledby={`skill-tab-${agent.id}`}
+                data-tab-panel={agent.id}
+              >
+                <div class="flex items-center gap-2 px-3 py-2.5">
+                  <code class="flex-1 overflow-x-auto whitespace-nowrap font-mono text-[11px] text-ink-700">{agent.command}</code>
+                  <button
+                    type="button"
+                    class="mcp-copy shrink-0 rounded-md px-2 py-1 font-mono text-[11px] font-semibold text-ink-600 transition hover:bg-paper-300 hover:text-ink-900"
+                    data-copy-target={`skill-cmd-${agent.id}`}
+                    data-copy-label={t('cta.config.copy')}
+                    data-copied-label={t('cta.config.copied')}
+                  >
+                    {t('cta.config.copy')}
+                  </button>
+                </div>
+                <pre id={`skill-cmd-${agent.id}`} class="hidden">{agent.command}</pre>
+                <p class="border-t border-paper-400/70 px-3 py-2 text-[11.5px] leading-relaxed text-ink-500">{agent.note}</p>
+              </div>
+            ))}
           </div>
+          <p class="mt-2 text-[11px] leading-relaxed text-ink-400">{t('cta.step3.chooseAgent')}</p>
           <p class="mt-2 rounded-md bg-paper-200 px-3 py-2 font-mono text-[10.5px] leading-relaxed text-ink-600">
             {t('cta.step3.paths')}
           </p>
@@ -153,6 +235,30 @@ const steps = [
       } catch {
         /* clipboard unavailable; silently ignore */
       }
+    });
+  });
+
+  const skillTabs = document.querySelectorAll<HTMLButtonElement>('.skill-tab');
+  const skillPanels = document.querySelectorAll<HTMLElement>('[data-tab-panel]');
+
+  skillTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tabTarget;
+      if (!target) return;
+
+      skillTabs.forEach((item) => {
+        const active = item === tab;
+        item.classList.toggle('bg-ink-900', active);
+        item.classList.toggle('text-paper-50', active);
+        item.classList.toggle('text-ink-600', !active);
+        item.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      skillPanels.forEach((panel) => {
+        const active = panel.dataset.tabPanel === target;
+        panel.classList.toggle('hidden', !active);
+        panel.classList.toggle('block', active);
+      });
     });
   });
 </script>
