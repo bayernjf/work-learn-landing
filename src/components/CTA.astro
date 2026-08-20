@@ -29,7 +29,6 @@ const mcpConfig = `{
 const steps = [
   { n: '1', title: t('cta.step1.title'), copy: t('cta.step1.copy') },
   { n: '2', title: t('cta.step2.title'), copy: t('cta.step2.copy') },
-  { n: '3', title: t('cta.step3.title'), copy: t('cta.step3.copy') },
 ] as const;
 ---
 
@@ -83,6 +82,21 @@ const steps = [
           </li>
         ))
       }
+      <li class="flex gap-4">
+        <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-900 font-mono text-[11px] font-bold text-paper-50">
+          3
+        </span>
+        <div>
+          <h3 class="text-[15px] font-semibold text-ink-900">{t('cta.step3.title')}</h3>
+          <p class="mt-1 text-[13px] leading-relaxed text-ink-500">{t('cta.step3.copy')}</p>
+          <p class="mt-2 text-[12px] leading-relaxed text-ink-400">{t('cta.step3.prereq')}</p>
+          <p class="mt-2 rounded-md bg-paper-200 px-3 py-2 font-mono text-[10.5px] leading-relaxed text-ink-600">
+            {t('cta.step3.paths')}
+          </p>
+          <p class="mt-2 text-[12px] leading-relaxed text-ink-500">{t('cta.step3.usage')}</p>
+          <p class="mt-1 text-[12px] leading-relaxed text-ink-400">{t('cta.step3.without')}</p>
+        </div>
+      </li>
     </ol>
 
     <div class="overflow-hidden rounded-xl border border-paper-400 bg-white">
