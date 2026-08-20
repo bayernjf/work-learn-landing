@@ -7,11 +7,23 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+const channels = [
+  { key: 'skill', label: 'Skill', sub: t('agents.skill.sub'), glyph: 'S', tag: 'optional' },
+  { key: 'mcp', label: 'MCP', sub: t('agents.mcp.sub'), glyph: 'M', tag: 'server' },
+  { key: 'cli', label: 'CLI', sub: t('agents.cli.sub'), glyph: 'C', tag: 'terminal' },
+] as const;
 ---
 
-<section class="overflow-hidden bg-ink-800 text-paper-50" id="every-agent">
+<section class="relative overflow-hidden bg-ink-900 text-paper-50" id="every-agent">
+  <!-- ambient grid + glow -->
+  <div class="pointer-events-none absolute inset-0 opacity-[0.5]" aria-hidden="true"
+    style="background-image:linear-gradient(to right,rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 30%,transparent 75%);"></div>
+  <div class="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
+    style="background:radial-gradient(closest-side,rgba(184,242,62,0.16),transparent 70%);"></div>
+
   <div
-    class="mx-auto grid w-[min(100%-40px,620px)] grid-cols-1 items-center gap-14 py-24 wide:min-h-[720px] wide:w-[min(1180px,calc(100%-64px))] wide:grid-cols-[0.83fr_1.17fr] wide:gap-20 wide:pt-[145px] wide:pb-[155px]"
+    class="relative mx-auto grid w-[min(100%-40px,620px)] grid-cols-1 items-center gap-14 py-24 wide:min-h-[720px] wide:w-[min(1180px,calc(100%-64px))] wide:grid-cols-[0.83fr_1.17fr] wide:gap-20 wide:pt-[145px] wide:pb-[155px]"
   >
     <div>
       <p class="mb-[22px] font-mono text-[10px] font-semibold uppercase leading-none tracking-[0.16em] text-brand-200">
@@ -22,43 +34,61 @@ const t = useTranslations(lang);
       </h2>
     </div>
 
-    <div
-      class="relative h-[380px] w-[116%] origin-top-left scale-[0.86] wide:h-[450px] wide:w-full wide:scale-100"
-      aria-label={t('agents.mapLabel')}
-    >
-      <div
-        class="absolute top-[155px] left-1/2 z-10 flex h-[140px] w-[178px] -translate-x-1/2 flex-col items-center justify-center rounded-xl border border-[#5f6c60] bg-[#26302a] shadow-[0_0_0_12px_#202822]"
-      >
-        <span
-          class="mb-3 grid h-9 w-9 place-items-center rounded-[10px] bg-brand-500 text-[17px] font-extrabold tracking-[-0.1em] text-brand-900"
-          >W</span
+    <div class="relative" aria-label={t('agents.mapLabel')}>
+      <!-- central core -->
+      <div class="relative mx-auto flex w-full max-w-[360px] flex-col items-center">
+        <div
+          class="relative z-10 flex w-full flex-col items-center rounded-2xl border border-white/10 bg-[#1d241f] px-8 py-9 text-center shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
         >
-        <strong class="text-sm tracking-[-0.03em]">{t('agents.center.title')}</strong>
-        <small class="mt-[5px] font-mono text-[10px] text-[#99a89b]">{t('agents.center.sub')}</small>
-      </div>
+          <span class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent"></span>
+          <img
+            src="/brand/work-learn-mark.svg"
+            alt=""
+            width="52"
+            height="52"
+            class="mb-4 h-[52px] w-[52px] rounded-xl shadow-[0_0_30px_-6px_rgba(184,242,62,0.6)]"
+          />
+          <strong class="text-[17px] tracking-[-0.03em] text-paper-50">{t('agents.center.title')}</strong>
+          <span class="mt-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-200/90">
+            {t('agents.center.sub')}
+          </span>
+        </div>
 
-      <div
-        class="absolute top-[18px] left-[3%] flex min-w-[145px] flex-col gap-[5px] rounded-lg border border-[#465449] bg-[#222b25] px-[15px] py-[13px]"
-      >
-        <strong class="text-[13px] text-paper-50">Skill</strong>
-        <span class="font-mono text-[10px] text-[#91a094]">{t('agents.skill.sub')}</span>
-      </div>
-      <div
-        class="absolute top-[218px] right-[1%] flex min-w-[145px] flex-col gap-[5px] rounded-lg border border-[#465449] bg-[#222b25] px-[15px] py-[13px]"
-      >
-        <strong class="text-[13px] text-paper-50">MCP</strong>
-        <span class="font-mono text-[10px] text-[#91a094]">{t('agents.mcp.sub')}</span>
-      </div>
-      <div
-        class="absolute bottom-5 left-[16%] flex min-w-[145px] flex-col gap-[5px] rounded-lg border border-[#465449] bg-[#222b25] px-[15px] py-[13px]"
-      >
-        <strong class="text-[13px] text-paper-50">CLI</strong>
-        <span class="font-mono text-[10px] text-[#91a094]">{t('agents.cli.sub')}</span>
-      </div>
+        <!-- connector stem (desktop) -->
+        <svg class="pointer-events-none absolute top-0 left-1/2 z-0 hidden h-full w-[560px] -translate-x-1/2 wide:block" viewBox="0 0 560 360" fill="none" aria-hidden="true">
+          <path d="M280 70 L280 150" stroke="url(#stemFade)" stroke-width="1.5" />
+          <path d="M280 150 L120 250" stroke="url(#stemFade)" stroke-width="1.5" />
+          <path d="M280 150 L440 250" stroke="url(#stemFade)" stroke-width="1.5" />
+          <circle cx="280" cy="70" r="3" fill="#B8F23E" />
+          <circle cx="280" cy="150" r="3" fill="#B8F23E" opacity="0.7" />
+          <circle cx="120" cy="250" r="3" fill="#B8F23E" opacity="0.7" />
+          <circle cx="440" cy="250" r="3" fill="#B8F23E" opacity="0.7" />
+          <defs>
+            <linearGradient id="stemFade" x1="280" y1="70" x2="280" y2="250" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#B8F23E" stop-opacity="0.7" />
+              <stop offset="1" stop-color="#B8F23E" stop-opacity="0.12" />
+            </linearGradient>
+          </defs>
+        </svg>
 
-      <div class="absolute top-[100px] left-[28%] h-px w-[22%] origin-left rotate-[31deg] bg-[#526155]"></div>
-      <div class="absolute top-[233px] left-[64%] h-px w-[18%] origin-left -rotate-[16deg] bg-[#526155]"></div>
-      <div class="absolute top-[337px] left-[30%] h-px w-[20%] origin-left -rotate-[33deg] bg-[#526155]"></div>
+        <!-- three channel cards -->
+        <div class="relative z-10 mt-10 grid w-full grid-cols-1 gap-3 wide:-mt-2 wide:grid-cols-3 wide:gap-4">
+          {channels.map((c) => (
+            <div
+              class="group flex flex-col gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-4 transition-colors hover:border-brand-400/40 hover:bg-white/[0.05]"
+            >
+              <div class="flex items-center justify-between">
+                <span class="grid h-7 w-7 place-items-center rounded-md bg-brand-500/15 font-mono text-[12px] font-bold text-brand-300 ring-1 ring-inset ring-brand-400/25">
+                  {c.glyph}
+                </span>
+                <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-400">{c.tag}</span>
+              </div>
+              <strong class="text-[13.5px] tracking-[-0.02em] text-paper-50">{c.label}</strong>
+              <span class="text-[11.5px] leading-snug text-ink-300/80">{c.sub}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
