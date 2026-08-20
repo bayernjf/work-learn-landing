@@ -46,6 +46,7 @@ export const ui = {
     'how.mcp.copy': 'Connect it once to give every agent the same memory, search, and review.',
     'how.skill.title': 'Skill (optional)',
     'how.skill.copy': 'Drop in SKILL.md so your agent knows when to save and how to shape it.',
+    'how.skill.code': 'organize this conversation',
     'how.cli.title': 'CLI',
     'how.cli.copy': 'Capture terminal sessions when an agent has no MCP support.',
 
@@ -58,6 +59,7 @@ export const ui = {
     'agents.mcp.sub': 'save and search',
     'agents.cli.sub': 'capture the terminal',
 
+    'loop.eyebrow': 'A loop, not a notebook',
     'loop.title': 'The point is not more notes.',
     'loop.subtitle': 'The point is the next time you can say it without thinking.',
     'loop.01.title': 'Keep the good sentence',
@@ -73,6 +75,7 @@ export const ui = {
     'loop.visual.practice': 'Use it in a sentence',
 
     'cta.eyebrow': 'Start with the conversations you already have',
+    'cta.advanced': 'Advanced setup — install the Skill & MCP',
     'cta.title': 'Make your work teach you.',
     'cta.copy': 'No new curriculum. No context switching. Just the useful English, when it matters.',
     'cta.button': 'Join the early build',
@@ -151,6 +154,7 @@ export const ui = {
     'how.mcp.copy': '接入一次，让每个 Agent 共用同一套记忆、搜索与复习。',
     'how.skill.title': 'Skill（可选）',
     'how.skill.copy': '放入 SKILL.md，Agent 就知道何时保存、如何整理成学习材料。',
+    'how.skill.code': '整理刚才这段对话',
     'how.cli.title': 'CLI',
     'how.cli.copy': 'Agent 不支持 MCP 时，用命令行采集终端里的会话。',
 
@@ -163,6 +167,7 @@ export const ui = {
     'agents.mcp.sub': '保存与搜索',
     'agents.cli.sub': '采集终端会话',
 
+    'loop.eyebrow': '是闭环，不是笔记本',
     'loop.title': '重点不是攒更多笔记。',
     'loop.subtitle': '重点是下一次你能不假思索地说出来。',
     'loop.01.title': '留下那句好表达',
@@ -176,6 +181,7 @@ export const ui = {
     'loop.visual.practice': '造一个句子',
 
     'cta.eyebrow': '就从你已经有的那些对话开始',
+    'cta.advanced': '高级接入 —— 安装 Skill 与 MCP',
     'cta.title': '让你的工作教你。',
     'cta.copy': '不用新教材，不用切换上下文，只在需要时给你有用的英语。',
     'cta.button': '加入早期版本',
