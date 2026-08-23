@@ -79,6 +79,22 @@ export const ui = {
     'cta.title': 'Make your work teach you.',
     'cta.copy': 'No new curriculum. No context switching. Just the useful English, when it matters.',
     'cta.button': 'Join the early build',
+    'cta.auto.label': 'Let your agent set it up',
+    'cta.auto.copy': 'Paste this into any agent that can edit files. It writes the config for you.',
+    'cta.auto.note': 'It will ask you for a token — a well-behaved agent never invents one.',
+    'cta.auto.prompt': `Set up the Work Learn remote MCP server in this agent for me.
+
+Endpoint: {endpoint} (Streamable HTTP, stateless)
+Auth: Authorization: Bearer <token> request header
+Server name: work-learn
+
+Steps:
+1. Work out which agent client I'm running and find its MCP config file (e.g. ~/.codex/config.toml, ~/.claude.json, ~/.cursor/mcp.json, ~/.config/opencode/opencode.json). Ask me if you're unsure.
+2. If this client supports OAuth for remote MCP, write only the URL and tell me to authorize in the browser.
+3. Otherwise ask me for a Personal Access Token — I copy it from the account page at {app}. Never invent or guess a token.
+4. Add the server as "work-learn", leave every other MCP server in the file untouched, and back the file up before editing.
+5. Tell me to restart the client, then confirm these five tools are available: create_session, save_material, search_corpus, get_review_items, mark_mastered.`,
+    'cta.manual.label': 'Manual setup',
     'cta.step1.title': 'Sign in to Work Learn',
     'cta.step1.copy': 'Open the web app and copy a personal access token from the account page.',
     'cta.step2.title': 'Connect the remote MCP',
@@ -189,6 +205,22 @@ export const ui = {
     'cta.title': '让你的工作教你。',
     'cta.copy': '不用新教材，不用切换上下文，只在需要时给你有用的英语。',
     'cta.button': '加入早期版本',
+    'cta.auto.label': '让 Agent 帮你配置',
+    'cta.auto.copy': '把这段话粘给任意有文件读写能力的 Agent，它会替你写好配置。',
+    'cta.auto.note': '它会主动向你索要 token —— 正常的 Agent 不该自己编一个。',
+    'cta.auto.prompt': `帮我在这个 Agent 里接入 Work Learn 的远程 MCP 服务器。
+
+端点：{endpoint}（Streamable HTTP，无状态）
+认证：请求头 Authorization: Bearer <token>
+服务器名称：work-learn
+
+请按以下步骤做：
+1. 判断我当前用的是哪个 Agent 客户端，找到它的 MCP 配置文件（例如 ~/.codex/config.toml、~/.claude.json、~/.cursor/mcp.json、~/.config/opencode/opencode.json）。不确定就先问我。
+2. 如果该客户端支持远程 MCP 的 OAuth 授权，只写入 URL，并告诉我去浏览器完成授权。
+3. 否则向我索要 Personal Access Token —— 我从 {app} 的账号页复制。不要凭空编造或猜测 token。
+4. 以 "work-learn" 为名写入配置，保留文件里已有的其他 MCP 服务器不变，修改前先备份该文件。
+5. 告诉我需要重启客户端，然后确认这 5 个工具可用：create_session、save_material、search_corpus、get_review_items、mark_mastered。`,
+    'cta.manual.label': '手动配置',
     'cta.step1.title': '登录 Work Learn',
     'cta.step1.copy': '打开 Web 应用，从账号页面复制一个 Personal Access Token。',
     'cta.step2.title': '连接远程 MCP',

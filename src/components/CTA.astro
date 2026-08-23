@@ -52,6 +52,10 @@ const steps = [
   { n: '1', title: t('cta.step1.title'), copy: t('cta.step1.copy') },
   { n: '2', title: t('cta.step2.title'), copy: t('cta.step2.copy') },
 ] as const;
+
+const agentPrompt = t('cta.auto.prompt')
+  .replaceAll('{endpoint}', MCP_REMOTE_URL)
+  .replaceAll('{app}', APP_URL);
 ---
 
 <section
@@ -93,6 +97,34 @@ const steps = [
     </div>
 
     <div class="wide:self-end">
+      <div class="mb-9 overflow-hidden rounded-xl border border-brand-500/40 bg-brand-500/5">
+        <div class="flex items-center justify-between gap-3 border-b border-brand-500/20 px-4 py-2.5">
+          <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-400">
+            {t('cta.auto.label')}
+          </span>
+          <button
+            type="button"
+            class="mcp-copy shrink-0 rounded-md bg-brand-500 px-2.5 py-1 font-mono text-[11px] font-bold text-brand-900 transition hover:bg-brand-400"
+            data-copy-target="agent-prompt"
+            data-copy-label={t('cta.config.copy')}
+            data-copied-label={t('cta.config.copied')}
+          >
+            {t('cta.config.copy')}
+          </button>
+        </div>
+        <p class="px-4 pt-3 text-[12px] leading-relaxed text-paper-300">{t('cta.auto.copy')}</p>
+        <pre
+          id="agent-prompt"
+          class="wl-scroll max-h-52 overflow-y-auto whitespace-pre-wrap break-words px-4 py-3 font-mono text-[10.5px] leading-[1.7] text-paper-200"
+        >{agentPrompt}</pre>
+        <p class="border-t border-brand-500/20 px-4 py-2.5 text-[11px] leading-relaxed text-paper-400">
+          {t('cta.auto.note')}
+        </p>
+      </div>
+
+      <p class="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-paper-500">
+        {t('cta.manual.label')}
+      </p>
       <ol class="mb-6 space-y-6">
         {steps.map((step) => (
           <li class="flex gap-4">
