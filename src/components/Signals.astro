@@ -8,8 +8,8 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-// The six clients @work-learn/setup detects and writes config for.
-const agents = ['Codex', 'Claude Code', 'Claude Desktop', 'CodeBuddy', 'Cursor', 'OpenCode'];
+// The agents the product targets.
+const agents = ['Claude', 'ChatGPT', 'Hermes', 'OpenCode'];
 ---
 
 <section
