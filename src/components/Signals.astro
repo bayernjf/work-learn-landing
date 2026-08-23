@@ -22,5 +22,11 @@ const agents = ['Codex', 'Claude Code', 'Claude Desktop', 'CodeBuddy', 'Cursor',
   >
     {agents.map((agent) => <span>{agent}</span>)}
     <span>{t('signals.terminal')}</span>
+    <span
+      class="inline-flex items-center gap-1.5 rounded-full bg-brand-200 px-3 py-1 text-[12px] font-semibold leading-[18px] tracking-[-0.01em] text-ink-800"
+    >
+      <span aria-hidden="true" class="text-[13px] leading-none text-brand-900">＋</span>
+      {t('signals.more')}
+    </span>
   </div>
 </section>

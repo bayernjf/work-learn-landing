@@ -38,6 +38,7 @@ export const ui = {
 
     'signals.label': 'Built for the way developers work',
     'signals.terminal': 'your terminal',
+    'signals.more': 'Plus any agent that speaks MCP',
 
     'how.title': 'Connect once. Learn from every agent.',
     'how.subtitle':
@@ -136,6 +137,7 @@ export const ui = {
 
     'signals.label': '按开发者的工作方式设计',
     'signals.terminal': '你的终端',
+    'signals.more': '市面常见 Agent 都能接，支持 MCP 即可',
 
     'how.title': '接一次，所有 Agent 都能学。',
     'how.subtitle':
