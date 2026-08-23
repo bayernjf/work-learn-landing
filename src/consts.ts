@@ -29,8 +29,10 @@ export const SOCIAL = {
   docs: 'https://github.com/bayernjf/work-learn/blob/main/docs/product-proposal.md',
 };
 
-// 默认 OG 图片（按语言切换）
+// 默认 OG 图片（按语言切换）。
+// 指向 `npm run build` 里 scripts/shot.mjs 截出的首屏图，而不是一组需要手工维护的
+// 单独素材 —— 手工素材没人生成，og:image 就一直是 404。
 export const OG_IMAGE = {
-  zh: '/og/og-zh.png',
-  en: '/og/og-en.png',
+  zh: '/preview-zh.png',
+  en: '/preview-en.png',
 };

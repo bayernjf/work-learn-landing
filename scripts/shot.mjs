@@ -44,6 +44,14 @@ const server = createServer((req, res) => {
     let fb = join(DIST, 'index.html');
     if (p !== '/' && p.endsWith('/')) fb = join(DIST, p, 'index.html');
     else if (p !== '/' && !extname(p)) fb = join(DIST, p, 'index.html');
+    // A 404, not a throw. Port 5173 is a popular dev port, so a stray tab left
+    // open by another project can poll this server -- and an unmapped path used
+    // to take the whole build down with it.
+    if (!existsSync(fb)) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('not found');
+      return;
+    }
     const c = readFileSync(fb);
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(c);
