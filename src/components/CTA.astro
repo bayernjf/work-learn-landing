@@ -9,9 +9,25 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const skillUrl = `${SOCIAL.github}/blob/main/skills/work-learn/SKILL.md`;
+// Served by the app rather than raw.githubusercontent.com, which is unreachable
+// from some networks. The app ships the same file it installs.
+const skillUrl = `${APP_URL}/skills/work-learn/SKILL.md`;
 const docsUrl = `${SOCIAL.github}/blob/main/docs/mcp-agent-setup.md`;
-const setupCommand = 'npx @work-learn/setup --token <your-token> --repo /path/to/work-learn';
+
+// Deliberately a preview, not a runnable command: nothing here works before the
+// reader has an account and a token, so the executable steps live in the app.
+const paths = [
+  {
+    title: t('cta.steps.agent.title'),
+    steps: [t('cta.steps.agent.s1'), t('cta.steps.agent.s2'), t('cta.steps.agent.s3')],
+  },
+  {
+    title: t('cta.steps.manual.title'),
+    steps: [t('cta.steps.manual.s1'), t('cta.steps.manual.s2'), t('cta.steps.manual.s3')],
+  },
+];
+
+const reasons = [t('cta.why.item1'), t('cta.why.item2'), t('cta.why.item3')];
 ---
 
 <section
@@ -29,6 +45,22 @@ const setupCommand = 'npx @work-learn/setup --token <your-token> --repo /path/to
         {t('cta.title')}
       </h2>
       <p class="mt-7 max-w-[430px] text-base leading-normal text-paper-300">{t('cta.copy')}</p>
+
+      <div class="mt-9 rounded-xl border border-paper-200/15 bg-ink-800/60 px-4 py-4">
+        <p class="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-400">
+          {t('cta.why.label')}
+        </p>
+        <p class="mt-2.5 text-[13px] leading-relaxed text-paper-200">{t('cta.why.copy')}</p>
+        <ul class="mt-3 flex flex-col gap-2">
+          {reasons.map((reason) => (
+            <li class="flex gap-2.5 text-[12px] leading-relaxed text-paper-400">
+              <span class="mt-[7px] size-1 shrink-0 rounded-full bg-brand-500" aria-hidden="true"></span>
+              <span>{reason}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div class="mt-8 flex flex-wrap gap-4">
         <a
           class="group inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-500 px-[18px] text-[13px] font-bold text-brand-900 transition hover:-translate-y-0.5 hover:bg-brand-400"
@@ -75,19 +107,31 @@ const setupCommand = 'npx @work-learn/setup --token <your-token> --repo /path/to
         <p class="border-t border-paper-200/10 px-4 py-2.5 font-mono text-[10.5px] leading-relaxed text-paper-400">
           {t('cta.remote.tools')}
         </p>
-        <p class="border-t border-paper-200/10 px-4 py-2.5 font-mono text-[10.5px] leading-relaxed text-paper-400">
-          {t('cta.remote.clients')}
-        </p>
         <p class="border-t border-paper-200/10 px-4 py-2.5 text-[11px] leading-relaxed text-paper-500">
           {t('cta.remote.caveat')}
         </p>
       </div>
 
-      <div class="mb-6 rounded-xl border border-brand-500/40 bg-brand-500/5 px-4 py-4">
+      <div class="rounded-xl border border-brand-500/40 bg-brand-500/5 px-4 py-4">
         <p class="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-400">
-          {t('cta.auto.label')}
+          {t('cta.steps.label')}
         </p>
-        <p class="mt-2.5 text-[13px] leading-relaxed text-paper-200">{t('cta.auto.copy')}</p>
+        <div class="mt-4 grid grid-cols-1 gap-4 wide:grid-cols-2">
+          {paths.map((path) => (
+            <div class="rounded-lg border border-paper-200/15 bg-ink-900/50 px-3.5 py-3.5">
+              <p class="text-[13px] font-bold text-paper-100">{path.title}</p>
+              <ol class="mt-2.5 flex flex-col gap-2">
+                {path.steps.map((step, index) => (
+                  <li class="flex gap-2 text-[11.5px] leading-relaxed text-paper-400">
+                    <span class="shrink-0 font-mono text-[10px] font-semibold text-brand-400">{index + 1}</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+        <p class="mt-4 text-[11px] leading-relaxed text-paper-400">{t('cta.steps.note')}</p>
         <a
           class="group mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-500 px-[18px] text-[13px] font-bold text-brand-900 transition hover:-translate-y-0.5 hover:bg-brand-400"
           href={APP_URL}
@@ -95,45 +139,7 @@ const setupCommand = 'npx @work-learn/setup --token <your-token> --repo /path/to
           {t('cta.auto.cta')}
           <span class="ml-[7px] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true">↗</span>
         </a>
-        <p class="mt-3 text-[11px] leading-relaxed text-paper-400">{t('cta.auto.note')}</p>
       </div>
-
-      <details class="group rounded-xl border border-paper-200/15 bg-ink-800/60 open:bg-ink-800">
-        <summary
-          class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-[13px] font-semibold text-paper-100 marker:content-none"
-        >
-          <span>{t('cta.local.summary')}</span>
-          <span class="font-mono text-[11px] text-paper-400 transition-transform group-open:rotate-90" aria-hidden="true">→</span>
-        </summary>
-
-        <div class="border-t border-paper-200/10 px-4 py-4">
-          <div class="overflow-hidden rounded-lg border border-paper-200/15 bg-ink-900/50">
-            <div class="flex items-start gap-2 px-3 py-2.5">
-              <code
-                id="setup-command"
-                class="min-w-0 flex-1 whitespace-pre-wrap break-all font-mono text-[10.5px] leading-[1.7] text-paper-200"
-              >{setupCommand}</code>
-              <button
-                type="button"
-                class="mcp-copy shrink-0 rounded-md border border-paper-200/15 px-2 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
-                data-copy-target="setup-command"
-                data-copy-label={t('cta.config.copy')}
-                data-copied-label={t('cta.config.copied')}
-              >
-                {t('cta.config.copy')}
-              </button>
-            </div>
-          </div>
-          <p class="mt-3 text-[11px] leading-relaxed text-paper-400">{t('cta.local.note')}</p>
-          <p class="mt-2 text-[11px] leading-relaxed text-paper-500">{t('cta.tokenNote')}</p>
-          <a
-            class="mt-3 inline-flex text-[12px] font-semibold text-paper-300 underline-offset-4 transition hover:text-paper-50 hover:underline"
-            href={docsUrl}
-          >
-            {t('cta.docs')}
-          </a>
-        </div>
-      </details>
     </div>
 
   </div>
