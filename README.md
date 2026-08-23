@@ -73,7 +73,8 @@ public/
 ## SEO 优化
 
 - 全站 meta（title/description/canonical/robots）通过 [SEO.astro](src/components/SEO.astro) 统一管理
-- Open Graph + Twitter Card，中英各一张 OG 图（`OG_IMAGE` in `consts.ts`）
+- Open Graph + Twitter Card，中英各一张 OG 图（`OG_IMAGE` in `consts.ts`，指向构建时截出的
+  `/preview-zh.png` 与 `/preview-en.png`，2560×1600）
 - hreflang 中英互指（`zh-CN` / `en-US` / `x-default`）
 - JSON-LD `@graph`：`Organization` + `WebSite` + `SoftwareApplication`
 - sitemap-index.xml 自动生成（含 i18n alternate）
@@ -86,9 +87,5 @@ public/
 - **llms.txt / llms-en.txt**：根目录 Markdown，向模型自述产品定义、三层接入、差异化、技术栈、关键链接与非目标
 - **SoftwareApplication JSON-LD**：标明产品实体与 featureList，便于模型识别
 - **段落结论前置**：模型偏好摘取首句与可引用断言
-
-## 待补充
-
-- `public/og/og-zh.png` 与 `public/og/og-en.png`（1200×630）尚未生成，`consts.ts` 中的 `OG_IMAGE` 已指向该路径
 
 产品方案见 [work-learn](https://github.com/bayernjf/work-learn) 仓库。
