@@ -1,6 +1,6 @@
 ---
 import { useTranslations, type Lang } from '../i18n';
-import { APP_URL, SOCIAL } from '../consts';
+import { APP_URL, MCP_REMOTE_URL, SOCIAL } from '../consts';
 
 interface Props {
   lang: Lang;
@@ -23,7 +23,18 @@ const skillInstalls = [
   { id: 'opencode', label: t('cta.agent.opencode'), command: `mkdir -p ~/.config/opencode/skills/work-learn && curl -fsSL ${skillRawUrl} -o ~/.config/opencode/skills/work-learn/SKILL.md`, note: t('cta.agent.opencode.note') },
 ] as const;
 
-const mcpConfig = `{
+const remoteConfig = `{
+  "mcpServers": {
+    "work-learn": {
+      "url": "${MCP_REMOTE_URL}",
+      "headers": {
+        "Authorization": "Bearer <paste-your-token>"
+      }
+    }
+  }
+}`;
+
+const localConfig = `{
   "mcpServers": {
     "work-learn": {
       "command": "pnpm",
@@ -41,6 +52,10 @@ const steps = [
   { n: '1', title: t('cta.step1.title'), copy: t('cta.step1.copy') },
   { n: '2', title: t('cta.step2.title'), copy: t('cta.step2.copy') },
 ] as const;
+
+const agentPrompt = t('cta.auto.prompt')
+  .replaceAll('{endpoint}', MCP_REMOTE_URL)
+  .replaceAll('{app}', APP_URL);
 ---
 
 <section
@@ -82,7 +97,35 @@ const steps = [
     </div>
 
     <div class="wide:self-end">
-      <ol class="mb-8 space-y-6">
+      <div class="mb-9 overflow-hidden rounded-xl border border-brand-500/40 bg-brand-500/5">
+        <div class="flex items-center justify-between gap-3 border-b border-brand-500/20 px-4 py-2.5">
+          <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-400">
+            {t('cta.auto.label')}
+          </span>
+          <button
+            type="button"
+            class="mcp-copy shrink-0 rounded-md bg-brand-500 px-2.5 py-1 font-mono text-[11px] font-bold text-brand-900 transition hover:bg-brand-400"
+            data-copy-target="agent-prompt"
+            data-copy-label={t('cta.config.copy')}
+            data-copied-label={t('cta.config.copied')}
+          >
+            {t('cta.config.copy')}
+          </button>
+        </div>
+        <p class="px-4 pt-3 text-[12px] leading-relaxed text-paper-300">{t('cta.auto.copy')}</p>
+        <pre
+          id="agent-prompt"
+          class="wl-scroll max-h-52 overflow-y-auto whitespace-pre-wrap break-words px-4 py-3 font-mono text-[10.5px] leading-[1.7] text-paper-200"
+        >{agentPrompt}</pre>
+        <p class="border-t border-brand-500/20 px-4 py-2.5 text-[11px] leading-relaxed text-paper-400">
+          {t('cta.auto.note')}
+        </p>
+      </div>
+
+      <p class="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-paper-500">
+        {t('cta.manual.label')}
+      </p>
+      <ol class="mb-6 space-y-6">
         {steps.map((step) => (
           <li class="flex gap-4">
             <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-500 font-mono text-[12px] font-bold text-brand-900">
@@ -95,6 +138,47 @@ const steps = [
           </li>
         ))}
       </ol>
+
+      <div class="mb-8 overflow-hidden rounded-xl border border-brand-500/30 bg-ink-800/60">
+        <div class="flex items-center justify-between gap-3 border-b border-paper-200/10 px-4 py-2.5">
+          <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-400">
+            {t('cta.remote.label')}
+          </span>
+          <button
+            type="button"
+            class="mcp-copy shrink-0 rounded-md border border-paper-200/15 px-2.5 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
+            data-copy-target="mcp-remote-url"
+            data-copy-label={t('cta.config.copy')}
+            data-copied-label={t('cta.config.copied')}
+          >
+            {t('cta.config.copy')}
+          </button>
+        </div>
+        <code
+          id="mcp-remote-url"
+          class="block break-all px-4 py-3 font-mono text-[12px] leading-[1.7] text-brand-300"
+        >{MCP_REMOTE_URL}</code>
+
+        <div class="flex items-center justify-between gap-3 border-t border-paper-200/10 px-4 py-2">
+          <span class="text-[11px] text-paper-400">{t('cta.remote.json')}</span>
+          <button
+            type="button"
+            class="mcp-copy shrink-0 rounded-md border border-paper-200/15 px-2.5 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
+            data-copy-target="mcp-remote-config"
+            data-copy-label={t('cta.config.copy')}
+            data-copied-label={t('cta.config.copied')}
+          >
+            {t('cta.config.copy')}
+          </button>
+        </div>
+        <pre
+          id="mcp-remote-config"
+          class="wl-scroll overflow-x-auto border-t border-paper-200/10 px-4 py-3.5 font-mono text-[11px] leading-[1.6] text-paper-200"
+        >{remoteConfig}</pre>
+        <p class="border-t border-paper-200/10 px-4 py-2.5 text-[11px] leading-relaxed text-paper-400">
+          {t('cta.remote.note')}
+        </p>
+      </div>
 
       <details class="group rounded-xl border border-paper-200/15 bg-ink-800/60 open:bg-ink-800">
         <summary
@@ -111,7 +195,7 @@ const steps = [
           <p class="mt-4 text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-400">{t('cta.step3.install')}</p>
 
           <div class="mt-2 overflow-hidden rounded-lg border border-paper-200/15 bg-ink-900/50">
-            <div class="flex gap-1 overflow-x-auto border-b border-paper-200/10 p-1" role="tablist" aria-label="Skill install agents">
+            <div class="wl-scroll flex gap-1 overflow-x-auto border-b border-paper-200/10 p-1" role="tablist" aria-label="Skill install agents">
               {skillInstalls.map((agent, index) => (
                 <button
                   type="button"
@@ -137,11 +221,11 @@ const steps = [
                 aria-labelledby={`skill-tab-${agent.id}`}
                 data-tab-panel={agent.id}
               >
-                <div class="flex items-center gap-2 px-3 py-2.5">
-                  <code class="flex-1 overflow-x-auto whitespace-nowrap font-mono text-[10.5px] text-paper-200">{agent.command}</code>
+                <div class="flex items-start gap-2 px-3 py-2.5">
+                  <code class="min-w-0 flex-1 whitespace-pre-wrap break-all font-mono text-[10.5px] leading-[1.7] text-paper-200">{agent.command}</code>
                   <button
                     type="button"
-                    class="mcp-copy shrink-0 rounded-md px-2 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
+                    class="mcp-copy shrink-0 rounded-md border border-paper-200/15 px-2 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
                     data-copy-target={`skill-cmd-${agent.id}`}
                     data-copy-label={t('cta.config.copy')}
                     data-copied-label={t('cta.config.copied')}
@@ -161,22 +245,32 @@ const steps = [
           <p class="mt-2 text-[12px] leading-relaxed text-paper-400">{t('cta.step3.usage')}</p>
           <p class="mt-1 text-[12px] leading-relaxed text-paper-500">{t('cta.step3.without')}</p>
 
-          <p class="mt-5 mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-400">{t('cta.config.label')}</p>
-          <div class="overflow-hidden rounded-lg border border-paper-200/15 bg-ink-900/50">
-            <div class="flex items-center justify-between border-b border-paper-200/10 px-4 py-2.5">
-              <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-paper-400">mcp.json</span>
-              <button
-                type="button"
-                class="mcp-copy rounded-md px-2.5 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
-                data-copy-target="mcp-config"
-                data-copy-label={t('cta.config.copy')}
-                data-copied-label={t('cta.config.copied')}
-              >
-                {t('cta.config.copy')}
-              </button>
+          <details class="group/local mt-5 rounded-lg border border-paper-200/15 bg-ink-900/40 open:bg-ink-900/60">
+            <summary
+              class="flex cursor-pointer list-none items-center justify-between gap-3 px-3.5 py-3 text-[12px] font-semibold text-paper-200 marker:content-none"
+            >
+              <span>{t('cta.local.summary')}</span>
+              <span class="font-mono text-[11px] text-paper-400 transition-transform group-open/local:rotate-90" aria-hidden="true">→</span>
+            </summary>
+            <div class="border-t border-paper-200/10 px-3.5 py-4">
+              <p class="mb-3 text-[11px] leading-relaxed text-paper-400">{t('cta.local.note')}</p>
+              <div class="overflow-hidden rounded-lg border border-paper-200/15 bg-ink-900/60">
+                <div class="flex items-center justify-between border-b border-paper-200/10 px-4 py-2.5">
+                  <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-paper-400">mcp.json</span>
+                  <button
+                    type="button"
+                    class="mcp-copy rounded-md border border-paper-200/15 px-2.5 py-1 font-mono text-[11px] font-semibold text-paper-300 transition hover:bg-paper-200/10 hover:text-paper-50"
+                    data-copy-target="mcp-local-config"
+                    data-copy-label={t('cta.config.copy')}
+                    data-copied-label={t('cta.config.copied')}
+                  >
+                    {t('cta.config.copy')}
+                  </button>
+                </div>
+                <pre id="mcp-local-config" class="wl-scroll overflow-x-auto px-4 py-3.5 font-mono text-[11px] leading-[1.6] text-paper-200">{localConfig}</pre>
+              </div>
             </div>
-            <pre id="mcp-config" class="overflow-x-auto px-4 py-3.5 font-mono text-[11px] leading-[1.6] text-paper-200">{mcpConfig}</pre>
-          </div>
+          </details>
           <p class="mt-3 text-[12px] leading-relaxed text-paper-500">{t('cta.tokenNote')}</p>
         </div>
       </details>
