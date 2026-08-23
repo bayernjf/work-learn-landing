@@ -11,7 +11,7 @@ const t = useTranslations(lang);
 const modes = [
   { title: 'how.mcp.title' as const, copy: 'how.mcp.copy' as const, code: 'save_material()', featured: true },
   { title: 'how.skill.title' as const, copy: 'how.skill.copy' as const, code: t('how.skill.code'), featured: false },
-  { title: 'how.cli.title' as const, copy: 'how.cli.copy' as const, code: 'learn capture', featured: false },
+  { title: 'how.cli.title' as const, copy: 'how.cli.copy' as const, code: 'learn capture', featured: false, badge: 'cta.comingSoon' as const },
 ];
 ---
 
@@ -39,13 +39,19 @@ const modes = [
         >
           <div class="mb-5 flex items-center justify-between">
             <span class="font-mono text-[10px] text-ink-400">0{index + 1}</span>
-            <span
-              class:list={[
-                'h-1.5 w-1.5 rounded-full',
-                mode.featured ? 'bg-brand-600' : 'bg-paper-400',
-              ]}
-              aria-hidden="true"
-            ></span>
+            {mode.badge ? (
+              <span class="rounded-full bg-paper-300 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-500">
+                {t(mode.badge)}
+              </span>
+            ) : (
+              <span
+                class:list={[
+                  'h-1.5 w-1.5 rounded-full',
+                  mode.featured ? 'bg-brand-600' : 'bg-paper-400',
+                ]}
+                aria-hidden="true"
+              ></span>
+            )}
           </div>
           <h3 class="mb-2.5 text-[22px] tracking-[-0.05em]">{t(mode.title)}</h3>
           <p class="mb-7 max-w-[260px] text-[13px] leading-normal text-ink-500">{t(mode.copy)}</p>
