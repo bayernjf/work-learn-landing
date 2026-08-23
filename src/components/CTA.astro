@@ -14,8 +14,8 @@ const t = useTranslations(lang);
 const skillUrl = `${APP_URL}/skills/work-learn/SKILL.md`;
 const docsUrl = `${SOCIAL.github}/blob/main/docs/mcp-agent-setup.md`;
 
-// Deliberately a preview, not a runnable command: nothing here works before the
-// reader has an account and a token, so the executable steps live in the app.
+// Deliberately a preview, not instructions: the reader has no token yet, and
+// every concrete config detail is maintained in the app instead of duplicated here.
 const paths = [
   {
     title: t('cta.steps.agent.title'),
@@ -27,7 +27,7 @@ const paths = [
   },
 ];
 
-const reasons = [t('cta.why.item1'), t('cta.why.item2'), t('cta.why.item3')];
+const reasons = [t('cta.why.item1'), t('cta.why.item2'), t('cta.why.item3'), t('cta.why.item4')];
 ---
 
 <section
