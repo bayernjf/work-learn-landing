@@ -39,19 +39,19 @@ export const ui = {
     'signals.label': 'Built for the way developers work',
     'signals.terminal': 'terminal builds of agents',
     'signals.terminalHint':
-      'The planned CLI: it covers agent sessions in your terminal, and clients that never get MCP support.',
+      'The CLI captures agent sessions in your terminal, and clients that never get MCP support.',
     'signals.more': 'Plus any agent that speaks MCP',
 
     'how.title': 'Connect once. Learn from every agent.',
     'how.subtitle':
-      'The MCP server does the saving, searching, and reviewing. The optional Skill tells your agent when and how to use it. A CLI for terminal capture is planned.',
+      'The MCP server does the saving, searching, and reviewing. The Skill tells your agent when and how to use it. The CLI captures straight from your terminal.',
     'how.mcp.title': 'MCP server',
     'how.mcp.copy': 'Connect it once to give every agent the same memory, search, and review.',
-    'how.skill.title': 'Skill (optional)',
+    'how.skill.title': 'Skill',
     'how.skill.copy': 'Drop in SKILL.md so your agent knows when to save and how to shape it.',
     'how.skill.code': 'organize this conversation',
     'how.cli.title': 'CLI',
-    'how.cli.copy': 'Planned for terminal sessions, for agents that never get MCP support.',
+    'how.cli.copy': 'Run it in your terminal to capture agent sessions and clients without MCP support.',
 
     'agents.eyebrow': 'The same learning layer, everywhere',
     'agents.title': 'Your agents can have different voices. Your learning history should not.',
@@ -60,7 +60,7 @@ export const ui = {
     'agents.center.sub': 'one memory',
     'agents.skill.sub': 'guides the agent',
     'agents.mcp.sub': 'save and search',
-    'agents.cli.sub': 'terminal capture, planned',
+    'agents.cli.sub': 'terminal capture',
 
     'loop.eyebrow': 'A loop, not a notebook',
     'loop.title': 'The point is not more notes.',
@@ -141,19 +141,19 @@ export const ui = {
 
     'signals.label': '按开发者的工作方式设计',
     'signals.terminal': '各类 Agent 的终端版',
-    'signals.terminalHint': '规划中的 CLI：覆盖终端里的 Agent 会话，以及始终不支持 MCP 的客户端。',
+    'signals.terminalHint': 'CLI 采集终端里的 Agent 会话，以及始终不支持 MCP 的客户端。',
     'signals.more': '市面常见 Agent 都能接，支持 MCP 即可',
 
     'how.title': '接一次，所有 Agent 都能学。',
     'how.subtitle':
-      'MCP 服务器负责保存、搜索与复习；可选的 Skill 告诉 Agent 何时保存、如何整理；采集终端会话的 CLI 还在规划中。',
+      'MCP 服务器负责保存、搜索与复习；Skill 告诉 Agent 何时保存、如何整理；CLI 直接从终端采集。',
     'how.mcp.title': 'MCP 服务器',
     'how.mcp.copy': '接入一次，让每个 Agent 共用同一套记忆、搜索与复习。',
-    'how.skill.title': 'Skill（可选）',
+    'how.skill.title': 'Skill',
     'how.skill.copy': '放入 SKILL.md，Agent 就知道何时保存、如何整理成学习材料。',
     'how.skill.code': '整理刚才这段对话',
     'how.cli.title': 'CLI',
-    'how.cli.copy': '规划中：面向终端会话，以及始终不支持 MCP 的 Agent。',
+    'how.cli.copy': '在终端中运行，采集 Agent 会话与不支持 MCP 的客户端。',
 
     'agents.eyebrow': '同一个学习层，处处可用',
     'agents.title': '你的 Agent 可以各有脾气，你的学习记录不该如此。',
@@ -162,7 +162,7 @@ export const ui = {
     'agents.center.sub': '统一存储',
     'agents.skill.sub': '指导 Agent 如何保存',
     'agents.mcp.sub': '保存与搜索',
-    'agents.cli.sub': '采集终端会话，规划中',
+    'agents.cli.sub': '采集终端会话',
 
     'loop.eyebrow': '是闭环，不是笔记本',
     'loop.title': '重点不是攒更多笔记。',

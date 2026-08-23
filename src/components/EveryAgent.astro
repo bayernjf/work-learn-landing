@@ -9,9 +9,9 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const channels = [
-  { key: 'skill', label: 'Skill', sub: t('agents.skill.sub'), glyph: 'S', tag: 'optional' },
+  { key: 'skill', label: 'Skill', sub: t('agents.skill.sub'), glyph: 'S', tag: 'primary' },
   { key: 'mcp', label: 'MCP', sub: t('agents.mcp.sub'), glyph: 'M', tag: 'server' },
-  { key: 'cli', label: 'CLI', sub: t('agents.cli.sub'), glyph: 'C', tag: 'planned' },
+  { key: 'cli', label: 'CLI', sub: t('agents.cli.sub'), glyph: 'C', tag: 'available' },
 ] as const;
 ---
 
