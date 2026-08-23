@@ -18,10 +18,24 @@ const agents = ['Codex', 'Claude Code', 'Claude Desktop', 'CodeBuddy', 'Cursor',
 >
   <span>{t('signals.label')}</span>
   <div
-    class="flex flex-wrap items-center gap-x-[22px] gap-y-2 font-sans text-[13px] font-semibold normal-case tracking-[-0.02em] text-ink-700 wide:gap-[clamp(16px,3.2vw,46px)]"
+    class="relative flex flex-wrap items-center gap-x-[22px] gap-y-2 font-sans text-[13px] font-semibold normal-case tracking-[-0.02em] text-ink-700 wide:gap-[clamp(16px,3.2vw,46px)]"
   >
     {agents.map((agent) => <span>{agent}</span>)}
-    <span>{t('signals.terminal')}</span>
+    <span
+      class="peer/term cursor-help border-b border-dashed border-ink-300 pb-px"
+      tabindex="0"
+      aria-describedby="signals-terminal-hint">{t('signals.terminal')}</span
+    >
+    <!-- Anchored to this row, not to the trigger: the trigger sits near the right
+         edge, so a trigger-anchored tooltip pushed the document wider on narrow
+         viewports and produced a horizontal scrollbar. -->
+    <span
+      class="pointer-events-none absolute left-0 top-full z-20 mt-2.5 w-full max-w-[300px] rounded-[10px] bg-ink-900 px-3 py-2 font-sans text-[12px] font-normal leading-[1.5] normal-case tracking-normal text-paper-100 opacity-0 shadow-[0_8px_24px_rgb(23_25_24/0.18)] transition-opacity duration-150 peer-hover/term:opacity-100 peer-focus/term:opacity-100 wide:left-auto wide:right-0"
+      id="signals-terminal-hint"
+      role="tooltip"
+    >
+      {t('signals.terminalHint')}
+    </span>
     <span
       class="inline-flex items-center gap-1.5 rounded-full bg-brand-200 px-3 py-1 text-[12px] font-semibold leading-[18px] tracking-[-0.01em] text-ink-800"
     >

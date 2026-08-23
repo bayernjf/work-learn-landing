@@ -37,7 +37,9 @@ export const ui = {
     'hero.drawer.example': '“We should decouple the API layer from the queue.”',
 
     'signals.label': 'Built for the way developers work',
-    'signals.terminal': 'your terminal',
+    'signals.terminal': 'terminal builds of agents',
+    'signals.terminalHint':
+      'The planned CLI: it covers agent sessions in your terminal, and clients that never get MCP support.',
     'signals.more': 'Plus any agent that speaks MCP',
 
     'how.title': 'Connect once. Learn from every agent.',
@@ -136,7 +138,8 @@ export const ui = {
     'hero.drawer.example': '“We should decouple the API layer from the queue.”',
 
     'signals.label': '按开发者的工作方式设计',
-    'signals.terminal': '你的终端',
+    'signals.terminal': '各类 Agent 的终端版',
+    'signals.terminalHint': '规划中的 CLI：覆盖终端里的 Agent 会话，以及始终不支持 MCP 的客户端。',
     'signals.more': '市面常见 Agent 都能接，支持 MCP 即可',
 
     'how.title': '接一次，所有 Agent 都能学。',
