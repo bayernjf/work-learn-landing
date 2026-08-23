@@ -21,8 +21,11 @@ const navItems = [
 ---
 
 <header
-  class="mx-auto flex h-[68px] w-[min(100%-40px,620px)] items-center justify-between gap-6 border-b border-paper-400 wide:h-[76px] wide:w-[min(1310px,calc(100%-64px))]"
+  class="sticky top-0 z-50 border-b border-paper-400 bg-paper-100/85 backdrop-blur-[10px] supports-[not(backdrop-filter:blur(0))]:bg-paper-100"
 >
+  <div
+    class="mx-auto flex h-[68px] w-[min(100%-40px,620px)] items-center justify-between gap-6 wide:h-[76px] wide:w-[min(1310px,calc(100%-64px))]"
+  >
   <a
     class="inline-flex items-center gap-2.5 text-[15px] font-bold tracking-[-0.04em]"
     href={home}
@@ -69,5 +72,6 @@ const navItems = [
         aria-hidden="true">↗</span
       >
     </a>
+    </div>
   </div>
 </header>
