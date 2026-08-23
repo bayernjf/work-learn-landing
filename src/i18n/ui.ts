@@ -75,57 +75,19 @@ export const ui = {
     'loop.visual.practice': 'Use it in a sentence',
 
     'cta.eyebrow': 'Start with the conversations you already have',
-    'cta.advanced': 'Advanced setup — install the Skill',
     'cta.title': 'Make your work teach you.',
     'cta.copy': 'No new curriculum. No context switching. Just the useful English, when it matters.',
     'cta.button': 'Join the early build',
-    'cta.auto.label': 'Let your agent set it up',
-    'cta.auto.copy': 'Paste this into any agent that can edit files. It writes the config for you.',
-    'cta.auto.note': 'It will ask you for a token — a well-behaved agent never invents one.',
-    'cta.auto.prompt': `Set up the Work Learn remote MCP server in this agent for me.
-
-Endpoint: {endpoint} (Streamable HTTP, stateless)
-Auth: Authorization: Bearer <token> request header
-Server name: work-learn
-
-Steps:
-1. Work out which agent client I'm running and find its MCP config file (e.g. ~/.codex/config.toml, ~/.claude.json, ~/.cursor/mcp.json, ~/.config/opencode/opencode.json). Ask me if you're unsure.
-2. If this client supports OAuth for remote MCP, write only the URL and tell me to authorize in the browser.
-3. Otherwise ask me for a Personal Access Token — I copy it from the account page at {app}. Never invent or guess a token.
-4. Add the server as "work-learn", leave every other MCP server in the file untouched, and back the file up before editing.
-5. Tell me to restart the client, then confirm these five tools are available: create_session, save_material, search_corpus, get_review_items, mark_mastered.`,
-    'cta.manual.label': 'Manual setup',
-    'cta.step1.title': 'Sign in to Work Learn',
-    'cta.step1.copy': 'Open the web app and copy a personal access token from the account page.',
-    'cta.step2.title': 'Connect the remote MCP',
-    'cta.step2.copy': 'Paste one URL into your agent\'s MCP settings — no clone, no install. Restart the agent afterwards.',
     'cta.remote.label': 'Remote MCP endpoint',
-    'cta.remote.json': 'Or paste this JSON config',
-    'cta.remote.note': 'Agents that support OAuth can just add the URL and authorize in the browser — tokens refresh themselves. For manual setup, use a Personal Access Token: the account page access token is a short-lived JWT that expires in about an hour.',
-    'cta.local.summary': 'Client without remote MCP support? Use local stdio',
-    'cta.local.note': 'The developer path: clone the repo, run pnpm install, then point your agent at the local server process.',
-    'cta.step3.title': 'Grab the Skill (optional)',
-    'cta.step3.copy': 'The Skill tells your agent when to save. Drop SKILL.md into a skills folder below, then restart the agent.',
-    'cta.step3.prereq': 'Requires the MCP server connected above.',
-    'cta.step3.install': 'One-line install (all detected agents):',
-    'cta.step3.chooseAgent': 'Or choose one agent below.',
-    'cta.agent.universal': 'Universal',
-    'cta.agent.codex': 'Codex',
-    'cta.agent.claude': 'Claude',
-    'cta.agent.codebuddy': 'CodeBuddy',
-    'cta.agent.cursor': 'Cursor',
-    'cta.agent.opencode': 'OpenCode',
-    'cta.agent.pi': 'Pi',
-    'cta.agent.universal.note': 'Installs into every detected skills folder, including shared agent folders.',
-    'cta.agent.codex.note': 'Installs to ~/.codex/skills/work-learn/SKILL.md. Restart Codex after installing.',
-    'cta.agent.claude.note': 'Installs to ~/.claude/skills/work-learn/SKILL.md. Restart Claude Code after installing.',
-    'cta.agent.codebuddy.note': 'Installs to ~/.codebuddy/skills/work-learn/SKILL.md. CLI and desktop share this folder.',
-    'cta.agent.cursor.note': 'Installs to ~/.cursor/skills/work-learn/SKILL.md. Restart Cursor after installing.',
-    'cta.agent.opencode.note': 'Installs to ~/.config/opencode/skills/work-learn/SKILL.md. Restart OpenCode after installing.',
-    'cta.agent.pi.note': 'Installs to ~/.pi/agent/skills/work-learn/SKILL.md. Restart Pi after installing.',
-    'cta.step3.paths': 'Codex: ~/.codex/skills/work-learn/SKILL.md · Claude Code: ~/.claude/skills/work-learn/SKILL.md · CodeBuddy: ~/.codebuddy/skills/work-learn/SKILL.md',
-    'cta.step3.usage': 'Then ask: “Save the useful English from this conversation.”',
-    'cta.step3.without': 'Without the Skill, the MCP tools still work — you just call them by hand.',
+    'cta.remote.tools': 'Five tools: create_session · save_material · search_corpus · get_review_items · mark_mastered',
+    'cta.remote.clients': 'Config covers Codex · Claude Code · CodeBuddy · Cursor · OpenCode · Pi',
+    'cta.remote.caveat': 'Whether an agent can speak remote MCP depends on the client. The ones that cannot go through local stdio instead.',
+    'cta.auto.label': 'Let your agent set it up',
+    'cta.auto.copy': 'Sign in and open “Connect an agent” — it hands you a prompt with your endpoint and token already filled in. Paste that into the agent you want to connect.',
+    'cta.auto.cta': 'Open Connect an agent',
+    'cta.auto.note': 'The app also creates and revokes the personal access token the prompt carries.',
+    'cta.local.summary': 'Developer: local stdio, and clients without remote MCP',
+    'cta.local.note': 'The installer detects your agents, writes each config format, and backs the file up first. Point --repo at your local work-learn clone.',
     'cta.config.copy': 'Copy',
     'cta.config.copied': 'Copied',
     'cta.skill': 'View SKILL.md',
@@ -201,57 +163,19 @@ Steps:
     'loop.visual.practice': '造一个句子',
 
     'cta.eyebrow': '就从你已经有的那些对话开始',
-    'cta.advanced': '高级接入 —— 安装 Skill',
     'cta.title': '让你的工作教你。',
     'cta.copy': '不用新教材，不用切换上下文，只在需要时给你有用的英语。',
     'cta.button': '加入早期版本',
-    'cta.auto.label': '让 Agent 帮你配置',
-    'cta.auto.copy': '把这段话粘给任意有文件读写能力的 Agent，它会替你写好配置。',
-    'cta.auto.note': '它会主动向你索要 token —— 正常的 Agent 不该自己编一个。',
-    'cta.auto.prompt': `帮我在这个 Agent 里接入 Work Learn 的远程 MCP 服务器。
-
-端点：{endpoint}（Streamable HTTP，无状态）
-认证：请求头 Authorization: Bearer <token>
-服务器名称：work-learn
-
-请按以下步骤做：
-1. 判断我当前用的是哪个 Agent 客户端，找到它的 MCP 配置文件（例如 ~/.codex/config.toml、~/.claude.json、~/.cursor/mcp.json、~/.config/opencode/opencode.json）。不确定就先问我。
-2. 如果该客户端支持远程 MCP 的 OAuth 授权，只写入 URL，并告诉我去浏览器完成授权。
-3. 否则向我索要 Personal Access Token —— 我从 {app} 的账号页复制。不要凭空编造或猜测 token。
-4. 以 "work-learn" 为名写入配置，保留文件里已有的其他 MCP 服务器不变，修改前先备份该文件。
-5. 告诉我需要重启客户端，然后确认这 5 个工具可用：create_session、save_material、search_corpus、get_review_items、mark_mastered。`,
-    'cta.manual.label': '手动配置',
-    'cta.step1.title': '登录 Work Learn',
-    'cta.step1.copy': '打开 Web 应用，从账号页面复制一个 Personal Access Token。',
-    'cta.step2.title': '连接远程 MCP',
-    'cta.step2.copy': '把一条 URL 填进 Agent 的 MCP 设置，无需 clone、无需安装。填好后重启 Agent。',
     'cta.remote.label': '远程 MCP 端点',
-    'cta.remote.json': '或粘贴这份 JSON 配置',
-    'cta.remote.note': '支持 OAuth 的 Agent 只需填 URL，浏览器授权后由 Agent 自动续期。手动填写请用 Personal Access Token：账号页那个 access token 是短期 JWT，约 1 小时过期。',
-    'cta.local.summary': '客户端不支持远程 MCP？改用本地 stdio',
-    'cta.local.note': '开发者路径：先 clone 仓库并执行 pnpm install，再让 Agent 指向本机的服务进程。',
-    'cta.step3.title': '获取 Skill（可选）',
-    'cta.step3.copy': 'Skill 告诉 Agent 何时保存、如何整理。把 SKILL.md 放进下面任意 skills 目录，然后重启 Agent。',
-    'cta.step3.prereq': '需要先配好上面的 MCP 服务器。',
-    'cta.step3.install': '一行命令安装（自动检测所有 Agent）：',
-    'cta.step3.chooseAgent': '也可以只选择一个 Agent。',
-    'cta.agent.universal': '通用',
-    'cta.agent.codex': 'Codex',
-    'cta.agent.claude': 'Claude',
-    'cta.agent.codebuddy': 'CodeBuddy',
-    'cta.agent.cursor': 'Cursor',
-    'cta.agent.opencode': 'OpenCode',
-    'cta.agent.pi': 'Pi',
-    'cta.agent.universal.note': '会安装到所有检测到的 skills 目录，也包括共享 Agent 目录。',
-    'cta.agent.codex.note': '安装到 ~/.codex/skills/work-learn/SKILL.md，完成后重启 Codex。',
-    'cta.agent.claude.note': '安装到 ~/.claude/skills/work-learn/SKILL.md，完成后重启 Claude Code。',
-    'cta.agent.codebuddy.note': '安装到 ~/.codebuddy/skills/work-learn/SKILL.md，CLI 终端和桌面端共用该目录。',
-    'cta.agent.cursor.note': '安装到 ~/.cursor/skills/work-learn/SKILL.md，完成后重启 Cursor。',
-    'cta.agent.opencode.note': '安装到 ~/.config/opencode/skills/work-learn/SKILL.md，完成后重启 OpenCode。',
-    'cta.agent.pi.note': '安装到 ~/.pi/agent/skills/work-learn/SKILL.md，完成后重启 Pi。',
-    'cta.step3.paths': 'Codex：~/.codex/skills/work-learn/SKILL.md · Claude Code：~/.claude/skills/work-learn/SKILL.md · CodeBuddy：~/.codebuddy/skills/work-learn/SKILL.md',
-    'cta.step3.usage': '然后说：“把这段对话里有用的英语保存下来。”',
-    'cta.step3.without': '不装 Skill，MCP 工具仍然可用，只是需要你手动调用。',
+    'cta.remote.tools': '5 个工具：create_session · save_material · search_corpus · get_review_items · mark_mastered',
+    'cta.remote.clients': '配置已适配 Codex · Claude Code · CodeBuddy · Cursor · OpenCode · Pi',
+    'cta.remote.caveat': '能否走远程 MCP 取决于客户端实现，不支持的客户端改走本地 stdio。',
+    'cta.auto.label': '让 Agent 帮你配置',
+    'cta.auto.copy': '登录后打开「Connect an agent」，那里会给你一段已填好端点和 token 的 prompt。把它粘给你想接入的 Agent 就行。',
+    'cta.auto.cta': '打开 Connect an agent',
+    'cta.auto.note': 'prompt 里带的 Personal Access Token 也在应用里创建和撤销。',
+    'cta.local.summary': '开发者：本地 stdio，以及不支持远程 MCP 的客户端',
+    'cta.local.note': '安装器会探测你的 Agent、按各家格式写入配置，并在修改前自动备份。--repo 指向你本机的 work-learn 仓库。',
     'cta.config.copy': '复制',
     'cta.config.copied': '已复制',
     'cta.skill': '查看 SKILL.md',
