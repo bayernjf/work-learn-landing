@@ -68,6 +68,26 @@ body {
   }
 }
 
+/* 深色代码块里的滚动条：原生样式在浅色纸感设计里过于突兀 */
+.wl-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(243 245 241 / 0.24) transparent;
+}
+.wl-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.wl-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.wl-scroll::-webkit-scrollbar-thumb {
+  background: rgb(243 245 241 / 0.24);
+  border-radius: 999px;
+}
+.wl-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(243 245 241 / 0.4);
+}
+
 /* EveryAgent motion */
 @keyframes wl-core-in {
   from { opacity: 0; transform: translateY(14px) scale(0.96); }
