@@ -81,7 +81,7 @@ export const ui = {
     'cta.title': 'Make your work teach you.',
     'cta.copy': 'No new curriculum. No context switching. Just the useful English, when it matters.',
     'cta.remote.label': 'Remote MCP endpoint',
-    'cta.remote.tools': 'Five tools: create_session · save_material · search_corpus · get_review_items · mark_mastered',
+    'cta.remote.tools': 'Six tools: create_session · save_material · save_question_translation · search_corpus · get_review_items · mark_mastered',
     'cta.remote.auth': 'Auth: OAuth 2.1 with PKCE, or a personal access token you issue yourself.',
     'cta.remote.caveat': 'Any client that speaks Streamable HTTP can use it. For the ones limited to local stdio, npx @work-learn/setup detects the client and writes the config for you.',
     'cta.auto.cta': 'Sign in and connect',
@@ -105,6 +105,7 @@ export const ui = {
     'cta.config.copy': 'Copy',
     'cta.config.copied': 'Copied',
     'cta.skill': 'View SKILL.md',
+    'cta.usage': 'Usage guide',
     'cta.docs': 'Full setup docs',
 
     'footer.tagline': 'Language from the work.',
@@ -181,7 +182,7 @@ export const ui = {
     'cta.title': '让你的工作教你。',
     'cta.copy': '不用新教材，不用切换上下文，只在需要时给你有用的英语。',
     'cta.remote.label': '远程 MCP 端点',
-    'cta.remote.tools': '5 个工具：create_session · save_material · search_corpus · get_review_items · mark_mastered',
+    'cta.remote.tools': '6 个工具：create_session · save_material · save_question_translation · search_corpus · get_review_items · mark_mastered',
     'cta.remote.auth': '认证：OAuth 2.1 + PKCE，或你自己签发的 Personal Access Token。',
     'cta.remote.caveat': '任何支持 Streamable HTTP 的客户端都能直接用。只支持本地 stdio 的，用 npx @work-learn/setup 自动识别客户端并写好配置。',
     'cta.auto.cta': '登录并接入',
@@ -205,6 +206,7 @@ export const ui = {
     'cta.config.copy': '复制',
     'cta.config.copied': '已复制',
     'cta.skill': '查看 SKILL.md',
+    'cta.usage': '使用手册',
     'cta.docs': '完整接入文档',
 
     'footer.tagline': '语言来自工作本身。',
