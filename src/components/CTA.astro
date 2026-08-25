@@ -12,6 +12,7 @@ const t = useTranslations(lang);
 // Served by the app rather than raw.githubusercontent.com, which is unreachable
 // from some networks. The app ships the same file it installs.
 const skillUrl = `${APP_URL}/skills/work-learn/SKILL.md`;
+const usageUrl = `${SOCIAL.github}/blob/main/docs/usage.md`;
 const docsUrl = `${SOCIAL.github}/blob/main/docs/mcp-agent-setup.md`;
 
 // Deliberately a preview, not instructions: the reader has no token yet, and
@@ -80,6 +81,12 @@ const reasons = [
           href={skillUrl}
         >
           {t('cta.skill')}
+        </a>
+        <a
+          class="inline-flex min-h-11 items-center justify-center px-[10px] text-[13px] font-semibold text-paper-300 underline-offset-4 transition hover:text-paper-50 hover:underline"
+          href={usageUrl}
+        >
+          {t('cta.usage')}
         </a>
         <a
           class="inline-flex min-h-11 items-center justify-center px-[10px] text-[13px] font-semibold text-paper-300 underline-offset-4 transition hover:text-paper-50 hover:underline"
