@@ -52,7 +52,7 @@ export const ui = {
     'how.skill.copy': 'Drop in SKILL.md so your agent knows when to save and how to shape it.',
     'how.skill.code': 'organize this conversation',
     'how.cli.title': 'CLI',
-    'how.cli.copy': 'Run it in your terminal to capture agent sessions and clients without MCP support.',
+    'how.cli.copy': 'Run it in your terminal to capture agent sessions and clients without MCP support — or, on macOS, use the menu-bar Companion to capture anything you select with a hotkey.',
 
     'agents.eyebrow': 'The same learning layer, everywhere',
     'agents.title': 'Your agents can have different voices. Your learning history should not.',
@@ -176,7 +176,7 @@ export const ui = {
     'how.skill.copy': '放入 SKILL.md，Agent 就知道何时保存、如何整理成学习材料。',
     'how.skill.code': '整理刚才这段对话',
     'how.cli.title': 'CLI',
-    'how.cli.copy': '在终端中运行，采集 Agent 会话与不支持 MCP 的客户端。',
+    'how.cli.copy': '在终端运行，采集 Agent 会话与不支持 MCP 的客户端；在 macOS 上，还可用菜单栏 Companion，一键采集你选中的任何内容。',
 
     'agents.eyebrow': '同一个学习层，处处可用',
     'agents.title': '你的 Agent 可以各有脾气，你的学习记录不该如此。',
