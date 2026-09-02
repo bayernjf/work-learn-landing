@@ -19,7 +19,8 @@ export const DEFAULT_LOCALE = 'en';
 export const APP_URL = 'https://work-learn.pages.dev';
 
 // 线上 API 与远程 MCP 端点（Streamable HTTP，无状态，带 Bearer token）
-export const API_URL = 'https://work-learn-api.vercel.app';
+// 统一使用 Cloudflare Pages 入口（国内可达），API 由 Pages worker 代理到 Vercel
+export const API_URL = 'https://work-learn.pages.dev';
 export const MCP_REMOTE_URL = `${API_URL}/api/mcp`;
 
 export const SOCIAL = {
